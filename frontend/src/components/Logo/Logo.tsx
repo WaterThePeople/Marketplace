@@ -15,7 +15,7 @@ function Logo() {
           alt="Logo"
           className={style.image}
         />
-        <div className={style.text}>Marketplace</div>
+        <div className={style.text}>SOMEegro</div>
       </button>
     </div>
   );
