@@ -11,7 +11,7 @@ function Logo() {
         }}
       >
         <img
-          src={process.env.PUBLIC_URL + "/logo_transparent.png"}
+          src={process.env.PUBLIC_URL + "/logo_transparent_blue.png"}
           alt="Logo"
           className={style.image}
         />
