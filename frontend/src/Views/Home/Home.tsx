@@ -6,7 +6,7 @@ import NewlyAddedHomeItem from "../../components/NewlyAddedHomeItem/NewlyAddedHo
 const recommendedList = [
   {
     name: "Elden Ring",
-    price: "244,99",
+    price: "249,99",
     image: "/assets/elden_ring.jpg",
   },
   {
@@ -21,7 +21,7 @@ const recommendedList = [
   },
   {
     name: "Baldur's Gate III",
-    price: "99,99",
+    price: "249,99",
     image: "/assets/baldurs_gate_3.jpg",
   },
 ];
@@ -48,15 +48,18 @@ const newlyAddedList = [
     image: "/assets/baldurs_gate_3.jpg",
   },
   {
-    name: "Dark Soul III",
+    name: "Dark Souls III",
     price: "169,99",
     image: "/assets/ds3.jpg",
   },
 ];
 
+const overallList = ["POPULAR", "BESTSELLERS", "ON SALE"];
+
 function Home() {
   const [currentRecommendedID, setCurrentRecommendedID] = useState(0);
   const [newlyAddedID, setNewlyAddedID] = useState(0);
+  const [currentOverallItem, setCurrentOverallItem] = useState("POPULAR");
 
   const nextRecommended = () => {
     if (currentRecommendedID === recommendedList.length - 1) {
@@ -156,6 +159,29 @@ function Home() {
           className={style.slider_button_newly_added}
           onClick={() => nextNewlyAdded()}
         >{`>`}</button>
+      </div>
+      <div className={style.overall_buttons_container}>
+        {overallList.map((item, index) => (
+          <button
+            key={index}
+            className={
+              item === currentOverallItem
+                ? style.overall_button_selected
+                : style.overall_button
+            }
+            onClick={() => setCurrentOverallItem(item)}
+          >
+            {item}
+          </button>
+        ))}
+      </div>
+      <div className={style.overall_container}>
+
+        <div className={style.footer}>
+          SOMEegro created and developed by:
+          Maksymilian Skrzypczak 22088
+          Kamil Wolański 22311
+        </div>
       </div>
     </div>
   );

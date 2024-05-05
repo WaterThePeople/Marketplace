@@ -60,7 +60,7 @@
 .slider_container_newly_added
     height: 100%
     width: 100%
-    margin: 32px 0px 64px 0px
+    margin: 32px 0px 96px 0px
     display: flex
     flex-direction: row
     gap: 40px
@@ -85,3 +85,41 @@
     flex-direction: row
     justify-content: space-between
     align-items: center
+
+.overall_buttons_container
+    width: 1000px
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+
+.overall_button
+    width: calc(100% / 3)
+    background-color: #f8f4f4
+    border: 0
+    text-align: center
+    font-size: 28px
+    padding: 8px
+    color: #adcdff
+    &:hover
+        cursor: pointer
+        color: black
+
+.overall_button_selected
+    background-color: #adcdff
+    border-radius: 10px 10px 0 0
+    padding: 8px
+    color: black
+    width: calc(100% / 3)
+    border: 0
+    text-align: center
+    font-size: 28px
+    &:hover
+        cursor: pointer
+
+.overall_container
+    background-color: #adcdff
+    width: 100%
+    height: 200px
+
+.footer
+    white-space: pre-wrap
