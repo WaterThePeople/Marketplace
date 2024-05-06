@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import style from "./Home.module.sass";
 import SliderHomeItem from "../../components/SliderHomeItem/SliderHomeItem";
 import NewlyAddedHomeItem from "../../components/NewlyAddedHomeItem/NewlyAddedHomeItem";
+import OverallHomeItem from "../../components/OverallHomeItem/OverallHomeItem";
 
 const recommendedList = [
   {
@@ -51,6 +52,135 @@ const newlyAddedList = [
     name: "Dark Souls III",
     price: "169,99",
     image: "/assets/ds3.jpg",
+  },
+];
+
+const popularList = [
+  {
+    name: "Elden Ring",
+    price: "244,99",
+    image: "/assets/elden_ring.jpg",
+  },
+  {
+    name: "MINECRAFT",
+    price: "99,99",
+    image: "/assets/minecraft.jpg",
+  },
+  {
+    name: "Super Mario Odyssey",
+    price: "199,99",
+    image: "/assets/mario.jpg",
+  },
+  {
+    name: "Baldur's Gate III",
+    price: "99,99",
+    image: "/assets/baldurs_gate_3.jpg",
+  },
+  {
+    name: "Dark Souls III",
+    price: "169,99",
+    image: "/assets/ds3.jpg",
+  },
+  {
+    name: "Dark Souls II",
+    price: "99,99",
+    image: "/assets/ds2.jpg",
+  },
+  {
+    name: "Dark Souls Remastered",
+    price: "149,99",
+    image: "/assets/ds1.jpg",
+  },
+  {
+    name: "Sekiro: Shadows Die Twice",
+    price: "249,99",
+    image: "/assets/sekiro.jpg",
+  },
+];
+
+const bestsellersList = [
+  {
+    name: "Dark Souls III",
+    price: "169,99",
+    image: "/assets/ds3.jpg",
+  },
+  {
+    name: "Dark Souls II",
+    price: "99,99",
+    image: "/assets/ds2.jpg",
+  },
+  {
+    name: "Dark Souls Remastered",
+    price: "149,99",
+    image: "/assets/ds1.jpg",
+  },
+  {
+    name: "Sekiro: Shadows Die Twice",
+    price: "249,99",
+    image: "/assets/sekiro.jpg",
+  },
+  {
+    name: "Elden Ring",
+    price: "244,99",
+    image: "/assets/elden_ring.jpg",
+  },
+  {
+    name: "MINECRAFT",
+    price: "99,99",
+    image: "/assets/minecraft.jpg",
+  },
+  {
+    name: "Super Mario Odyssey",
+    price: "199,99",
+    image: "/assets/mario.jpg",
+  },
+  {
+    name: "Baldur's Gate III",
+    price: "99,99",
+    image: "/assets/baldurs_gate_3.jpg",
+  },
+];
+
+const saleList = [
+  {
+    name: "Dark Souls Remastered",
+    price: "149,99",
+    image: "/assets/ds1.jpg",
+  },
+  {
+    name: "Sekiro: Shadows Die Twice",
+    price: "249,99",
+    image: "/assets/sekiro.jpg",
+  },
+  {
+    name: "Elden Ring",
+    price: "244,99",
+    image: "/assets/elden_ring.jpg",
+  },
+  {
+    name: "MINECRAFT",
+    price: "99,99",
+    image: "/assets/minecraft.jpg",
+  },
+  {
+    name: "Dark Souls III",
+    price: "169,99",
+    image: "/assets/ds3.jpg",
+  },
+  {
+    name: "Dark Souls II",
+    price: "99,99",
+    image: "/assets/ds2.jpg",
+  },
+  {
+    name: "Super Mario Odyssey",
+    price: "199,99",
+    image: "/assets/mario.jpg",
+  },
+  {
+    name: "Baldur's Gate III",
+    price: "99,99",
+    image: "/assets/baldurs_gate_3.jpg",
   },
 ];
 
@@ -176,10 +306,40 @@ function Home() {
         ))}
       </div>
       <div className={style.overall_container}>
-
+        <div className={style.overall_tab}>
+          {currentOverallItem === "POPULAR" &&
+            popularList.map((item, index) => (
+              <OverallHomeItem
+                name={item.name}
+                image={item.image}
+                price={item.price}
+                key={index}
+              />
+            ))}
+          {currentOverallItem === "BESTSELLERS" &&
+            bestsellersList.map((item, index) => (
+              <OverallHomeItem
+                name={item.name}
+                image={item.image}
+                price={item.price}
+                key={index}
+              />
+            ))}
+          {currentOverallItem === "ON SALE" &&
+            saleList.map((item, index) => (
+              <OverallHomeItem
+                name={item.name}
+                image={item.image}
+                price={item.price}
+                key={index}
+              />
+            ))}
+        </div>
         <div className={style.footer}>
           SOMEegro created and developed by:
+          <br />
           Maksymilian Skrzypczak 22088
+          <br />
           Kamil Wolański 22311
         </div>
       </div>
