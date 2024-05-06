@@ -238,7 +238,13 @@ function Home() {
         <button
           className={style.slider_button}
           onClick={() => previousRecommended()}
-        >{`<`}</button>
+        >
+          <img
+            src={process.env.PUBLIC_URL + "/assets/arrow.png"}
+            alt="background_image"
+            className={style.arrow_left}
+          />
+        </button>
 
         <SliderHomeItem
           name={recommendedList[currentRecommendedID].name}
@@ -248,7 +254,13 @@ function Home() {
         <button
           className={style.slider_button}
           onClick={() => nextRecommended()}
-        >{`>`}</button>
+        >
+          <img
+            src={process.env.PUBLIC_URL + "/assets/arrow.png"}
+            alt="background_image"
+            className={style.arrow_right}
+          />
+        </button>
       </div>
       <div className={style.index_container}>
         {[...Array(recommendedList.length)].map((item, index) => (
@@ -267,7 +279,13 @@ function Home() {
         <button
           className={style.slider_button_newly_added}
           onClick={() => previousNewlyAdded()}
-        >{`<`}</button>
+        >
+          <img
+            src={process.env.PUBLIC_URL + "/assets/arrow.png"}
+            alt="background_image"
+            className={style.arrow_left}
+          />
+        </button>
         <div className={style.container_newly_added}>
           <NewlyAddedHomeItem
             name={newlyAddedList[calcPosition(newlyAddedID)].name}
@@ -288,7 +306,13 @@ function Home() {
         <button
           className={style.slider_button_newly_added}
           onClick={() => nextNewlyAdded()}
-        >{`>`}</button>
+        >
+          <img
+            src={process.env.PUBLIC_URL + "/assets/arrow.png"}
+            alt="background_image"
+            className={style.arrow_right}
+          />
+        </button>
       </div>
       <div className={style.overall_buttons_container}>
         {overallList.map((item, index) => (

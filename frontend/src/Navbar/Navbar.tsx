@@ -8,6 +8,8 @@ function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
 
   const [search, setSearch] = useState("");
 
+  const path = window.location.pathname
+
   return (
     <div className={style.container}>
       <div className={style.top_container}>
@@ -19,7 +21,7 @@ function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search..."
-            ></input>
+            />
             <button className={style.search_button}>SEARCH</button>
           </div>
         </div>
@@ -27,18 +29,18 @@ function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
           {isLoggedIn ? (
             <div className={style.logged}>Water The People</div>
           ) : (
-            <button
-              className={style.not_logged}
-              //onClick={() => navigate("/games")}
-            >
-              Login
-            </button>
+            <button className={style.not_logged}>Login</button>
           )}
         </div>
       </div>
-      <div className={style.separator}/>
+      <div className={style.separator} />
       <div className={style.bottom_container}>
-        <button className={style.bottom_container_button}>PRODUCTS</button>
+        <button
+          className={style.bottom_container_button}
+          onClick={() => navigate("/products")}
+        >
+          PRODUCTS
+        </button>
         <button className={style.bottom_container_button}>SALES</button>
         <button className={style.bottom_container_button}>INFORMATION</button>
         <button className={style.bottom_container_button}>HELP</button>

@@ -17,8 +17,10 @@ function NewlyAddedHomeItem({
         alt="background_image"
         className={style.image}
       />
-      <div className={style.name}>{name}</div>
-      <div className={style.price}>{price} zł</div>
+      <div className={style.info}>
+        <div className={style.name}>{name}</div>
+        <div className={style.price}>{price} zł</div>
+      </div>
     </button>
   );
 }

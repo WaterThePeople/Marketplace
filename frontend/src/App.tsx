@@ -4,7 +4,7 @@ import Navbar from "./Navbar/Navbar";
 import style from "./App.module.sass";
 
 import Home from "./Views/Home/Home";
-import GamesPage from "./Views/GamesPage/GamesPage";
+import ProductsPage from "./Views/ProductsPage/ProductsPage";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
       <div className={style.container}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/games" element={<GamesPage />} />
+          <Route path="/products" element={<ProductsPage />} />
         </Routes>
       </div>
     </Router>
