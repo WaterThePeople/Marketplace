@@ -12,6 +12,9 @@
     justify-content: space-between
     align-items: center
     flex-grow: 1
+    flex-wrap: wrap
+    @media (max-width: 1000px)
+        width: calc(100% - 24px)
 
 .separator
     width: 100%
@@ -25,6 +28,8 @@
     flex-direction: row
     justify-content: space-between
     align-items: center
+    @media (max-width: 1000px)
+        width: calc(100% - 24px)
 
 .bottom_container_button
     width: 25%
@@ -33,16 +38,29 @@
     border-radius: 10px
     border: 0
     background-color: white
+    display: flex
+    justify-content: center
+    align-items: center
     &:hover
         cursor: pointer
         background-color: #adcdff
+    @media (max-width: 600px)
+        font-size: 12px
+        height: 24px
+        width: fit-content
+
+.path_button
+
+.path_button_focus
+    border-bottom: 2px solid black
+    width: fit-content
 
 .logo_and_search
     display: flex
     flex-direction: row
-    justify-content: center
     align-items: center
-    gap: 32px
+    col-gap: 32px
+    flex-wrap: wrap
 
 .search_container
     display: flex
@@ -60,6 +78,8 @@
     border-radius: 10px 0px 0px 10px
     &:focus
         outline: none
+    @media (max-width: 1000px)
+        width: 100%
 
 .search_button
     border: 1px solid black
@@ -74,11 +94,13 @@
         background-color: #9dc1fa
 
 .user
+    margin-bottom: 8px
+    margin-top: 8px
 
 .logged
     font-size: 28px
     background-color: #adcdff
-    line-height: 32px
+    line-height: 28px
     padding: 8px
     padding-inline: 32px
     border-radius: 16px
@@ -86,11 +108,14 @@
     color: black
     &:hover
         cursor: pointer
+    @media (max-width: 700px)
+        font-size: 16px
+        line-height: 16px
 
 .not_logged
     font-size: 28px
     background-color: #adcdff
-    line-height: 32px
+    line-height: 28px
     padding: 8px
     padding-inline: 32px
     border-radius: 16px
@@ -98,3 +123,6 @@
     color: black
     &:hover
         cursor: pointer
+    @media (max-width: 700px)
+        font-size: 16px
+        line-height: 16px

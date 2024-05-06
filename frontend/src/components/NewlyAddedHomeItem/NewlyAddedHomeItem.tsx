@@ -19,7 +19,7 @@ function NewlyAddedHomeItem({
       />
       <div className={style.info}>
         <div className={style.name}>{name}</div>
-        <div className={style.price}>{price} zł</div>
+        {/* <div className={style.price}>{price} zł</div> */}
       </div>
     </button>
   );

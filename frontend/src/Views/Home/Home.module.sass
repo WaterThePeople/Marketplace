@@ -12,6 +12,8 @@
     margin-top: 64px
     font-size: 28px
     text-align: left
+    @media (max-width: 1000px)
+        width: calc(100% - 12px)
 
 .slider_container
     height: 100%
@@ -22,6 +24,8 @@
     gap: 16px
     justify-content: center
     align-items: center
+    @media (max-width: 1150px)
+        width: calc(100% - 12px)
 
 .slider_button
     -webkit-box-shadow: 0px 0px 10px 0px rgba(66, 68, 90, 1)
@@ -55,24 +59,34 @@
     justify-content: center
     margin-bottom: 32px
     gap: 32px
+    @media (max-width: 1000px)
+        width: 100%
 
 .index_item
     width: 40px
     height: 20px
     background-color: #b7b7b7
     border-radius: 10px
+    @media (max-width: 700px)
+        width: 15px
+        height: 15px
 
 .index_item_focused
     width: 40px
     height: 20px
     background-color: #adcdff
     border-radius: 10px
+    @media (max-width: 700px)
+        width: 15px
+        height: 15px
 
 .newly_added_text
     margin-top: 64px
     font-size: 28px
     width: 1000px
     text-align: left
+    @media (max-width: 1000px)
+        width: calc(100% - 12px)
 
 .slider_container_newly_added
     height: 100%
@@ -83,6 +97,8 @@
     gap: 16px
     justify-content: center
     align-items: center
+    @media (max-width: 1150px)
+        width: calc(100% - 12px)
 
 .slider_button_newly_added
     -webkit-box-shadow: 0px 0px 10px 0px rgba(66, 68, 90, 1)
@@ -106,12 +122,19 @@
     flex-direction: row
     justify-content: space-between
     align-items: center
+    @media (max-width: 1150px)
+        width: 100%
+    @media (max-width: 600px)
+        flex-direction: column
+        gap: 12px
 
 .overall_buttons_container
     width: 1000px
     display: flex
     flex-direction: row
     justify-content: space-between
+    @media (max-width: 1000px)
+        width: 100%
 
 .overall_button
     width: calc(100% / 3)
@@ -125,6 +148,9 @@
     &:hover
         cursor: pointer
         color: black
+    @media (max-width: 700px)
+        font-size: 10px
+        padding: 4px
 
 .overall_button_selected
     background-color: #adcdff
@@ -138,6 +164,9 @@
     font-weight: 500
     &:hover
         cursor: pointer
+    @media (max-width: 700px)
+        font-size: 10px
+        padding: 4px
 
 .overall_container
     background-color: #adcdff
@@ -154,6 +183,9 @@
     display: grid
     grid-template-columns: repeat(2, 1fr)
     gap: 12px
+    @media (max-width: 1050px)
+        width: calc(100% - 12px)
+        grid-template-columns: repeat(1, 1fr)
 
 .footer
     border-top: 1px solid black

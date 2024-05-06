@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./NavBar.module.sass";
 import Logo from "../components/Logo/Logo";
 import { useNavigate } from "react-router-dom";
+import useWindowDimensions from "../utils/useWindowDimensions";
 
 function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
   let navigate = useNavigate();
 
   const [search, setSearch] = useState("");
 
-  const path = window.location.pathname
+  const path = window.location.pathname;
+
+  const { height, width } = useWindowDimensions();
+
+  console.log(width);
 
   return (
     <div className={style.container}>
+      
       <div className={style.top_container}>
         <div className={style.logo_and_search}>
           <Logo />
@@ -39,11 +45,52 @@ function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
           className={style.bottom_container_button}
           onClick={() => navigate("/products")}
         >
-          PRODUCTS
+          <div
+            className={
+              path === "/products" ? style.path_button_focus : style.path_button
+            }
+          >
+            PRODUCTS
+          </div>
         </button>
-        <button className={style.bottom_container_button}>SALES</button>
-        <button className={style.bottom_container_button}>INFORMATION</button>
-        <button className={style.bottom_container_button}>HELP</button>
+        <button
+          className={style.bottom_container_button}
+          onClick={() => navigate("/sales")}
+        >
+          <div
+            className={
+              path === "/sales" ? style.path_button_focus : style.path_button
+            }
+          >
+            SALES
+          </div>
+        </button>
+        <button
+          className={style.bottom_container_button}
+          onClick={() => navigate("/information")}
+        >
+          <div
+            className={
+              path === "/information"
+                ? style.path_button_focus
+                : style.path_button
+            }
+          >
+            INFORMATION
+          </div>
+        </button>
+        <button
+          className={style.bottom_container_button}
+          onClick={() => navigate("/help")}
+        >
+          <div
+            className={
+              path === "/help" ? style.path_button_focus : style.path_button
+            }
+          >
+            HELP
+          </div>
+        </button>
       </div>
     </div>
   );
