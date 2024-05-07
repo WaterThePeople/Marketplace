@@ -13,8 +13,6 @@ function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
 
   const { height, width } = useWindowDimensions();
 
-  console.log(width);
-
   return (
     <div className={style.container}>
       

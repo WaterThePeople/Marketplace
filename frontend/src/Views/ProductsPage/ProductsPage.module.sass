@@ -1,0 +1,40 @@
+.container
+    width: 100%
+    display: flex
+    justify-content: center
+    background: #f8f4f4
+
+.main
+    width: calc(100% - 320px)
+    display: flex
+    flex-direction: row
+    gap: 12px
+    padding-top: 64px
+    padding-bottom: 64px
+    @media (max-width: 1000px)
+        width: calc(100% - 12px)
+        padding-top: 12px
+        padding-bottom: 12px
+        flex-direction: column
+
+.categories
+    width: fit-content
+    max-width: 20%
+    @media (max-width: 1000px)
+        width: 100%
+        max-width: 100%
+
+.products_container
+    flex: 1
+    gap: 12px
+
+.filters
+    margin-bottom: 12px
+
+.products
+    width: 100%
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    gap: 12px
+    @media (max-width: 1000px)
+        grid-template-columns: repeat(1, 1fr)
