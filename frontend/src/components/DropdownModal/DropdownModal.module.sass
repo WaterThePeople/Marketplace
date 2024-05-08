@@ -13,6 +13,9 @@
     flex-direction: row
     justify-content: space-between
     align-items: center
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(66, 68, 90, 1)
+    -moz-box-shadow: 0px 0px 6px 0px rgba(66, 68, 90, 1)
+    box-shadow: 0px 0px 6px 0px rgba(66, 68, 90, 1)
     &:hover
         cursor: pointer
         color: #adcdff
@@ -29,6 +32,9 @@
     flex-direction: row
     justify-content: space-between
     align-items: center
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(66, 68, 90, 1)
+    -moz-box-shadow: 0px 0px 6px 0px rgba(66, 68, 90, 1)
+    box-shadow: 0px 0px 6px 0px rgba(66, 68, 90, 1)
     &:hover
         cursor: pointer
         color: #adcdff
@@ -50,12 +56,16 @@
 
 .modal
     position: absolute
-    width: calc(100% - 4px)
+    width: calc(100% - 3px)
     background: white
     border-radius: 0px 0px 10px 10px
     border: 2px solid black
     display: flex
     flex-direction: column
+    clip-path: inset(0px -10px -10px -10px)
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(66, 68, 90, 1)
+    -moz-box-shadow: 0px 0px 6px 0px rgba(66, 68, 90, 1)
+    box-shadow: 0px 0px 6px 0px rgba(66, 68, 90, 1)
 
 .modal_item
     padding: 4px 12px

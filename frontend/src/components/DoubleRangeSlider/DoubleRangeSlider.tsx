@@ -44,7 +44,7 @@ function DoubleRangeSlider({
         className={cn(style.left_input, style.input)}
         id="input_left"
         step={1}
-        style={{ zIndex: leftValue > max / 2 ? 5 : 4 }}
+        style={{ zIndex: leftValue > min + (max - min) / 2 ? 6 : 4 }}
       />
       <div
         className={style.bar}
@@ -63,7 +63,7 @@ function DoubleRangeSlider({
         className={cn(style.right_input, style.input)}
         id="input_right"
         step={1}
-        style={{ zIndex: leftValue > max / 2 ? 4 : 5 }}
+        style={{ zIndex: 5 }}
       />
     </div>
   );

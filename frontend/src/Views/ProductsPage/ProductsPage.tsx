@@ -3,8 +3,8 @@ import style from "./ProductsPage.module.sass";
 
 import CategoriesCard from "../../components/CategoriesCard/CategoriesCard";
 import FiltersCard from "../../components/FiltersCard/FiltersCard";
-import useWindowDimensions from "../../utils/useWindowDimensions";
 import ProductsPageItem from "../../components/ProductsPageItem/ProductsPageItem";
+import Pagination from "../../components/Pagination/Pagination";
 
 const products = [
   {
@@ -80,7 +80,8 @@ const products = [
 ];
 
 function ProductsPage() {
-  const { width, height } = useWindowDimensions();
+  const [currentPage, setCurrentPage] = useState(1);
+
   return (
     <div className={style.container}>
       <div className={style.main}>
@@ -101,6 +102,12 @@ function ProductsPage() {
               />
             ))}
           </div>
+          <Pagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            pageSize={10}
+            amount={46}
+          />
         </div>
       </div>
     </div>
