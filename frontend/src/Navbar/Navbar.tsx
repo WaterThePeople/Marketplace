@@ -15,11 +15,10 @@ function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
 
   return (
     <div className={style.container}>
-      
       <div className={style.top_container}>
         <div className={style.logo_and_search}>
           <Logo />
-          <div className={style.search_container}>
+          {/* <div className={style.search_container}>
             <input
               className={style.search_input}
               value={search}
@@ -27,7 +26,7 @@ function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
               placeholder="Search..."
             />
             <button className={style.search_button}>SEARCH</button>
-          </div>
+          </div> */}
         </div>
         <div className={style.user}>
           {isLoggedIn ? (

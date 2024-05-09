@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import style from "./ProductsPage.module.sass";
+import style from "./SalesPage.module.sass";
 
 import CategoriesCard from "../../components/CategoriesCard/CategoriesCard";
 import FiltersCard from "../../components/FiltersCard/FiltersCard";
@@ -93,7 +93,7 @@ const products = [
   },
 ];
 
-function ProductsPage() {
+function SalesPage() {
   const [currentPage, setCurrentPage] = useState(1);
 
   return (
@@ -129,4 +129,4 @@ function ProductsPage() {
   );
 }
 
-export default ProductsPage;
+export default SalesPage;

@@ -5,6 +5,8 @@ import style from "./App.module.sass";
 
 import Home from "./Views/Home/Home";
 import ProductsPage from "./Views/ProductsPage/ProductsPage";
+import Product from "./Views/Product/Product";
+import SalesPage from "./Views/SalesPage/SalesPage";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/:id" element={<Product />} />
+          <Route path="/sales" element={<SalesPage />} />
         </Routes>
       </div>
     </Router>
