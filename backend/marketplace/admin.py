@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import TestItem
+from .models import Game
 
 class TestAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'completed')
+    list_display = ('name', 'price', 'discount')
 
 # Register your models here.
 
-admin.site.register(TestItem, TestAdmin)
+admin.site.register(Game, TestAdmin)
