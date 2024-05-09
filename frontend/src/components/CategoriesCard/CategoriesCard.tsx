@@ -61,7 +61,7 @@ function CategoriesCard() {
           </div>
         ))}
       </div>
-      <div className={style.category_container}>
+      {/* <div className={style.category_container}>
         <div className={style.category}>Developer:</div>
         {developer.map((item, index) => (
           <div className={style.item} key={index}>
@@ -69,7 +69,7 @@ function CategoriesCard() {
             <div className={style.text}>{item}</div>
           </div>
         ))}
-      </div>
+      </div> */}
       <div className={style.category_container}>
         <div className={style.category}>Platform:</div>
         {platform.map((item, index) => (
