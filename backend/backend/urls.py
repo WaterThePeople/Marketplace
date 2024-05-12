@@ -4,5 +4,6 @@ from marketplace import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/',views.HomePageView.as_view()),
+    path('api/home',views.HomePageView.as_view()),
+    path('api/createMod/<pk>',views.AddModGameView.as_view()),
 ]

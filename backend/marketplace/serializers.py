@@ -25,4 +25,4 @@ class AllGameSerializer(serializers.ModelSerializer):
             return obj.price
     class Meta:
         model = Game
-        fields = ('id', 'name', 'price', 'image','sale','year','category','budget','developer','platform')
+        fields = ('id', 'name', 'price','discount_price', 'image','recommended','new','sale','year','category','budget','developer','platform')
