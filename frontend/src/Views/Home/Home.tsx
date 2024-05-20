@@ -3,6 +3,7 @@ import style from "./Home.module.sass";
 import SliderHomeItem from "../../components/SliderHomeItem/SliderHomeItem";
 import NewlyAddedHomeItem from "../../components/NewlyAddedHomeItem/NewlyAddedHomeItem";
 import OverallHomeItem from "../../components/OverallHomeItem/OverallHomeItem";
+import axios from "axios";
 
 const recommendedList = [
   {
@@ -230,6 +231,26 @@ function Home() {
       return id;
     }
   };
+
+  const [data, setData] = useState<any[]>([]);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/home")
+      .then((response) => {
+        const data = response.data;
+        setData(data);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+  }, []);
+
+  console.log(data);
 
   return (
     <div className={style.container}>
