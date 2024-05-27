@@ -12,8 +12,12 @@ class HomePageView(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['recommended','new','bestsellers']
 
-class AddModGameView(generics.RetrieveUpdateDestroyAPIView):
+class SingleModDelGameView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = HomeGameSerializer
     queryset = Game.objects.all()
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['recommended','new','bestsellers']
+
+class AddGameView(generics.CreateAPIView):
+    serializer_class = AllGameSerializer
+    queryset = Game.objects.all()
