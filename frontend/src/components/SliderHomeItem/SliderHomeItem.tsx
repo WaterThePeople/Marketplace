@@ -13,7 +13,7 @@ function SliderHomeItem({
   return (
     <div className={style.container}>
       <img
-        src={process.env.PUBLIC_URL + image}
+        src={image}
         alt="background_image"
         className={style.image}
       />

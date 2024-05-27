@@ -5,192 +5,98 @@ import NewlyAddedHomeItem from "../../components/NewlyAddedHomeItem/NewlyAddedHo
 import OverallHomeItem from "../../components/OverallHomeItem/OverallHomeItem";
 import axios from "axios";
 
-const recommendedList = [
-  {
-    name: "Elden Ring",
-    price: "249,99",
-    image: "/assets/elden_ring.jpg",
-  },
-  {
-    name: "MINECRAFT",
-    price: "99,99",
-    image: "/assets/minecraft.jpg",
-  },
-  {
-    name: "Super Mario Odyssey",
-    price: "199,99",
-    image: "/assets/mario.jpg",
-  },
-  {
-    name: "Baldur's Gate III",
-    price: "249,99",
-    image: "/assets/baldurs_gate_3.jpg",
-  },
-];
-
-const newlyAddedList = [
-  {
-    name: "Elden Ring",
-    price: "244,99",
-    image: "/assets/elden_ring.jpg",
-  },
-  {
-    name: "MINECRAFT",
-    price: "99,99",
-    image: "/assets/minecraft.jpg",
-  },
-  {
-    name: "Super Mario Odyssey",
-    price: "199,99",
-    image: "/assets/mario.jpg",
-  },
-  {
-    name: "Baldur's Gate III",
-    price: "99,99",
-    image: "/assets/baldurs_gate_3.jpg",
-  },
-  {
-    name: "Dark Souls III",
-    price: "169,99",
-    image: "/assets/ds3.jpg",
-  },
-];
-
-const popularList = [
-  {
-    name: "Elden Ring",
-    price: "244,99",
-    image: "/assets/elden_ring.jpg",
-  },
-  {
-    name: "MINECRAFT",
-    price: "99,99",
-    image: "/assets/minecraft.jpg",
-  },
-  {
-    name: "Super Mario Odyssey",
-    price: "199,99",
-    image: "/assets/mario.jpg",
-  },
-  {
-    name: "Baldur's Gate III",
-    price: "99,99",
-    image: "/assets/baldurs_gate_3.jpg",
-  },
-  {
-    name: "Dark Souls III",
-    price: "169,99",
-    image: "/assets/ds3.jpg",
-  },
-  {
-    name: "Dark Souls II",
-    price: "99,99",
-    image: "/assets/ds2.jpg",
-  },
-  {
-    name: "Dark Souls Remastered",
-    price: "149,99",
-    image: "/assets/ds1.jpg",
-  },
-  {
-    name: "Sekiro: Shadows Die Twice",
-    price: "249,99",
-    image: "/assets/sekiro.jpg",
-  },
-];
-
-const bestsellersList = [
-  {
-    name: "Dark Souls III",
-    price: "169,99",
-    image: "/assets/ds3.jpg",
-  },
-  {
-    name: "Dark Souls II",
-    price: "99,99",
-    image: "/assets/ds2.jpg",
-  },
-  {
-    name: "Dark Souls Remastered",
-    price: "149,99",
-    image: "/assets/ds1.jpg",
-  },
-  {
-    name: "Sekiro: Shadows Die Twice",
-    price: "249,99",
-    image: "/assets/sekiro.jpg",
-  },
-  {
-    name: "Elden Ring",
-    price: "244,99",
-    image: "/assets/elden_ring.jpg",
-  },
-  {
-    name: "MINECRAFT",
-    price: "99,99",
-    image: "/assets/minecraft.jpg",
-  },
-  {
-    name: "Super Mario Odyssey",
-    price: "199,99",
-    image: "/assets/mario.jpg",
-  },
-  {
-    name: "Baldur's Gate III",
-    price: "99,99",
-    image: "/assets/baldurs_gate_3.jpg",
-  },
-];
-
-const saleList = [
-  {
-    name: "Dark Souls Remastered",
-    price: "149,99",
-    image: "/assets/ds1.jpg",
-  },
-  {
-    name: "Sekiro: Shadows Die Twice",
-    price: "249,99",
-    image: "/assets/sekiro.jpg",
-  },
-  {
-    name: "Elden Ring",
-    price: "244,99",
-    image: "/assets/elden_ring.jpg",
-  },
-  {
-    name: "MINECRAFT",
-    price: "99,99",
-    image: "/assets/minecraft.jpg",
-  },
-  {
-    name: "Dark Souls III",
-    price: "169,99",
-    image: "/assets/ds3.jpg",
-  },
-  {
-    name: "Dark Souls II",
-    price: "99,99",
-    image: "/assets/ds2.jpg",
-  },
-  {
-    name: "Super Mario Odyssey",
-    price: "199,99",
-    image: "/assets/mario.jpg",
-  },
-  {
-    name: "Baldur's Gate III",
-    price: "99,99",
-    image: "/assets/baldurs_gate_3.jpg",
-  },
-];
-
 const overallList = ["POPULAR", "BESTSELLERS", "ON SALE"];
 
 function Home() {
   const [currentRecommendedID, setCurrentRecommendedID] = useState(0);
   const [newlyAddedID, setNewlyAddedID] = useState(0);
   const [currentOverallItem, setCurrentOverallItem] = useState("POPULAR");
+
+  const [recommendedList, setRecommendedList] = useState<any[]>([]);
+  const [newlyAddedList, setNewlyAddedList] = useState<any[]>([]);
+  const [popularList, setPopularList] = useState<any[]>([]);
+  const [bestsellersList, setBestsellersList] = useState<any[]>([]);
+  const [saleList, setSaleList] = useState<any[]>([]);
+
+  const fetchRecommended = () => {
+    axios
+      .get("api/home?recommended=true")
+      .then((response) => {
+        const data = response.data;
+        setRecommendedList(data);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+  };
+
+  const fetchNew = () => {
+    axios
+      .get("api/home?new=true")
+      .then((response) => {
+        const data = response.data;
+        setNewlyAddedList(data);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+  };
+
+  const fetchPopular = () => {
+    axios
+      .get("api/home?popular=true")
+      .then((response) => {
+        const data = response.data;
+        setPopularList(data);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+  };
+
+  const fetchSale = () => {
+    axios
+      .get("api/home?sale=true")
+      .then((response) => {
+        const data = response.data;
+        setSaleList(data);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+  };
+
+  const fetchBestsellers = () => {
+    axios
+      .get("api/home?bestsellers=true")
+      .then((response) => {
+        const data = response.data;
+        setBestsellersList(data);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+  };
 
   const nextRecommended = () => {
     if (currentRecommendedID === recommendedList.length - 1) {
@@ -232,25 +138,13 @@ function Home() {
     }
   };
 
-  const [data, setData] = useState<any[]>([]);
-
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/api/home")
-      .then((response) => {
-        const data = response.data;
-        setData(data);
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        }
-      });
+    fetchRecommended();
+    fetchNew();
+    fetchPopular();
+    fetchBestsellers();
+    fetchSale();
   }, []);
-
-  console.log(data);
 
   return (
     <div className={style.container}>
@@ -268,9 +162,9 @@ function Home() {
         </button>
 
         <SliderHomeItem
-          name={recommendedList[currentRecommendedID].name}
-          price={recommendedList[currentRecommendedID].price}
-          image={recommendedList[currentRecommendedID].image}
+          name={recommendedList[currentRecommendedID]?.name}
+          price={recommendedList[currentRecommendedID]?.price}
+          image={recommendedList[currentRecommendedID]?.image}
         />
         <button
           className={style.slider_button}
@@ -309,19 +203,19 @@ function Home() {
         </button>
         <div className={style.container_newly_added}>
           <NewlyAddedHomeItem
-            name={newlyAddedList[calcPosition(newlyAddedID)].name}
-            price={newlyAddedList[calcPosition(newlyAddedID)].price}
-            image={newlyAddedList[calcPosition(newlyAddedID)].image}
+            name={newlyAddedList[calcPosition(newlyAddedID)]?.name}
+            price={newlyAddedList[calcPosition(newlyAddedID)]?.price}
+            image={newlyAddedList[calcPosition(newlyAddedID)]?.image}
           />
           <NewlyAddedHomeItem
-            name={newlyAddedList[calcPosition(newlyAddedID + 1)].name}
-            price={newlyAddedList[calcPosition(newlyAddedID + 1)].price}
-            image={newlyAddedList[calcPosition(newlyAddedID + 1)].image}
+            name={newlyAddedList[calcPosition(newlyAddedID + 1)]?.name}
+            price={newlyAddedList[calcPosition(newlyAddedID + 1)]?.price}
+            image={newlyAddedList[calcPosition(newlyAddedID + 1)]?.image}
           />
           <NewlyAddedHomeItem
-            name={newlyAddedList[calcPosition(newlyAddedID + 2)].name}
-            price={newlyAddedList[calcPosition(newlyAddedID + 2)].price}
-            image={newlyAddedList[calcPosition(newlyAddedID + 2)].image}
+            name={newlyAddedList[calcPosition(newlyAddedID + 2)]?.name}
+            price={newlyAddedList[calcPosition(newlyAddedID + 2)]?.price}
+            image={newlyAddedList[calcPosition(newlyAddedID + 2)]?.image}
           />
         </div>
         <button
