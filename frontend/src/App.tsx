@@ -7,6 +7,8 @@ import Home from "./Views/Home/Home";
 import ProductsPage from "./Views/ProductsPage/ProductsPage";
 import Product from "./Views/Product/Product";
 import SalesPage from "./Views/SalesPage/SalesPage";
+import Rules from "./Views/Rules/Rules";
+import Help from "./Views/Help/Help";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:id" element={<Product />} />
           <Route path="/sales" element={<SalesPage />} />
+          <Route path="/rules" element={<Rules />} />
+          <Route path="/questions" element={<Help />} />
         </Routes>
       </div>
     </Router>

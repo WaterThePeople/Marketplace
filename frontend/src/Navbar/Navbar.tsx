@@ -64,28 +64,28 @@ function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
         </button>
         <button
           className={style.bottom_container_button}
-          onClick={() => navigate("/information")}
+          onClick={() => navigate("/rules")}
         >
           <div
             className={
-              path === "/information"
-                ? style.path_button_focus
-                : style.path_button
+              path === "/rules" ? style.path_button_focus : style.path_button
             }
           >
-            INFORMATION
+            RULES
           </div>
         </button>
         <button
           className={style.bottom_container_button}
-          onClick={() => navigate("/help")}
+          onClick={() => navigate("/questions")}
         >
           <div
             className={
-              path === "/help" ? style.path_button_focus : style.path_button
+              path === "/questions"
+                ? style.path_button_focus
+                : style.path_button
             }
           >
-            HELP
+            QUESTIONS
           </div>
         </button>
       </div>

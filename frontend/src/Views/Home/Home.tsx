@@ -20,9 +20,9 @@ function Home() {
 
   const fetchRecommended = () => {
     axios
-      .get("api/home?recommended=true")
+      .get("api/home?recommended=true&limit=4")
       .then((response) => {
-        const data = response.data;
+        const data = response?.data?.results;
         setRecommendedList(data);
       })
       .catch((error) => {
@@ -36,9 +36,9 @@ function Home() {
 
   const fetchNew = () => {
     axios
-      .get("api/home?new=true")
+      .get("api/home?new=true&limit=6")
       .then((response) => {
-        const data = response.data;
+        const data = response?.data?.results;
         setNewlyAddedList(data);
       })
       .catch((error) => {
@@ -52,9 +52,9 @@ function Home() {
 
   const fetchPopular = () => {
     axios
-      .get("api/home?popular=true")
+      .get("api/home?popular=true&limit=8")
       .then((response) => {
-        const data = response.data;
+        const data = response.data.results;
         setPopularList(data);
       })
       .catch((error) => {
@@ -68,9 +68,9 @@ function Home() {
 
   const fetchSale = () => {
     axios
-      .get("api/home?sale=true")
+      .get("api/home?sale=true&limit=8")
       .then((response) => {
-        const data = response.data;
+        const data = response.data.results;
         setSaleList(data);
       })
       .catch((error) => {
@@ -84,9 +84,9 @@ function Home() {
 
   const fetchBestsellers = () => {
     axios
-      .get("api/home?bestsellers=true")
+      .get("api/home?bestsellers=true&limit=8")
       .then((response) => {
-        const data = response.data;
+        const data = response.data.results;
         setBestsellersList(data);
       })
       .catch((error) => {
@@ -248,30 +248,15 @@ function Home() {
         <div className={style.overall_tab}>
           {currentOverallItem === "POPULAR" &&
             popularList.map((item, index) => (
-              <OverallHomeItem
-                name={item.name}
-                image={item.image}
-                price={item.price}
-                key={index}
-              />
+              <OverallHomeItem data={item} key={index} />
             ))}
           {currentOverallItem === "BESTSELLERS" &&
             bestsellersList.map((item, index) => (
-              <OverallHomeItem
-                name={item.name}
-                image={item.image}
-                price={item.price}
-                key={index}
-              />
+              <OverallHomeItem data={item} key={index} />
             ))}
           {currentOverallItem === "ON SALE" &&
             saleList.map((item, index) => (
-              <OverallHomeItem
-                name={item.name}
-                image={item.image}
-                price={item.price}
-                key={index}
-              />
+              <OverallHomeItem data={item} key={index} sale={true} />
             ))}
         </div>
         <div className={style.footer}>
@@ -280,6 +265,10 @@ function Home() {
           Maksymilian Skrzypczak 22088
           <br />
           Kamil Wolański 22311
+          <br />
+          Contact Email: test@gmail.com
+          <br />
+          Contact Phone Number: 123 456 789
         </div>
       </div>
     </div>
