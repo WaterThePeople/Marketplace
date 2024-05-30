@@ -10,6 +10,16 @@ from django.db.models import BooleanField
 
 class NumberRangeFilter(rest_framework.BaseRangeFilter, rest_framework.NumberFilter):
     pass
+
+class HomePageFilterSet(rest_framework.FilterSet):
+    sale = rest_framework.BooleanFilter(field_name = 'sale', label="sale")
+    def filter_queryset(self, queryset):
+        queryset = queryset.annotate(sale=ExpressionWrapper(Q(discount__gt=0),output_field=BooleanField()))
+        return super().filter_queryset(queryset)
+    class Meta:
+        model = Game
+        fields = ['recommended','new','bestsellers','popular']
+
 class FullListFilterSet(rest_framework.FilterSet):
 #    def to_html(self, request, queryset, view):
     category = rest_framework.CharFilter(field_name='category__category_name', lookup_expr='exact')
@@ -36,7 +46,7 @@ class HomePageView(generics.ListAPIView):
     serializer_class = HomeGameSerializer
     queryset = Game.objects.all()
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['recommended','new','bestsellers','sale','popular']
+    filterset_class = HomePageFilterSet
 
 class SingleModDelGameView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AllGameSerializer

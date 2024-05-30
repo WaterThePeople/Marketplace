@@ -13,12 +13,11 @@ class PlatformSerializer(serializers.ModelSerializer):
 
 class HomeGameSerializer(serializers.ModelSerializer):
     discount_price = serializers.SerializerMethodField('get_discount_price')
-
+    sale = serializers.SerializerMethodField()
+    def get_sale(self,obj):
+        return obj.discount != 0
     def get_discount_price(self, obj):
-        if obj.discount is not None:
-            return obj.price - obj.price * obj.discount
-        else: 
-            return obj.price
+        return obj.price - obj.price * obj.discount
     class Meta:
         model = Game
         fields = ('id', 'name', 'price','discount_price', 'image','recommended','new','bestsellers','sale','popular')
