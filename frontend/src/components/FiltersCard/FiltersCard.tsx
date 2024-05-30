@@ -10,7 +10,21 @@ const sortByList = [
   "Price ascending",
 ];
 
-function FiltersCard() {
+function FiltersCard({
+  minYear,
+  setMinYear,
+  maxYear,
+  setMaxYear,
+  startYear,
+  endYear,
+}: {
+  minYear: number;
+  setMinYear: React.Dispatch<React.SetStateAction<number>>;
+  maxYear: number;
+  setMaxYear: React.Dispatch<React.SetStateAction<number>>;
+  startYear: number;
+  endYear: number;
+}) {
   const [year, setYear] = useState(1973);
   const [currentYear, setCurrentYear] = useState(2024);
 
@@ -24,17 +38,17 @@ function FiltersCard() {
       <div className={style.item_container}>
         <div className={style.text}>Release year:</div>
         <div className={style.slider_container}>
-          <div className={style.slider_container_text_left}>{year}</div>
+          <div className={style.slider_container_text_left}>{minYear}</div>
           <DoubleRangeSlider
-            leftValue={year}
-            setLeftValue={setYear}
-            rightValue={currentYear}
-            setRightValue={setCurrentYear}
-            min={1973}
-            max={2024}
+            leftValue={minYear}
+            setLeftValue={setMinYear}
+            rightValue={maxYear}
+            setRightValue={setMaxYear}
+            min={startYear}
+            max={endYear}
             width="100%"
           />
-          <div className={style.slider_container_text_right}>{currentYear}</div>
+          <div className={style.slider_container_text_right}>{maxYear}</div>
         </div>
       </div>
       <div className={style.item_container}>
