@@ -36,7 +36,7 @@ class AllGameSerializer(serializers.ModelSerializer):
         return [platform.platform_name for platform in obj.platform.all()]
     
     def get_discount_price(self, obj):
-        if obj.discount is not None:
+        if obj.discount is not None and obj.sale:
             return obj.price - obj.price * obj.discount
         else: 
             return obj.price

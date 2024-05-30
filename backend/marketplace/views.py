@@ -11,15 +11,19 @@ class NumberRangeFilter(rest_framework.BaseRangeFilter, rest_framework.NumberFil
     pass
 class FullListFilterSet(rest_framework.FilterSet):
 #    def to_html(self, request, queryset, view):
-    category = rest_framework.CharFilter(field_name='categories__name', lookup_expr='icontains')
-    platform = rest_framework.CharFilter(field_name='platforms__name', lookup_expr='icontains')
-    pricerange = NumberRangeFilter(field_name='price',lookup_expr='range',label="price-range")
-    discounted_price = NumberRangeFilter(method='filter_discounted_price',label="discounted-price-range")
+    category = rest_framework.CharFilter(field_name='category__category_name', lookup_expr='exact')
+    platform = rest_framework.CharFilter(field_name='platform__platform_name', lookup_expr='exact')
+    #pricerange = NumberRangeFilter(field_name='price',lookup_expr='range',label="price-range")
+    discountedpricerange = NumberRangeFilter(method='filter_discounted_price',label="discounted-price-range",lookup_expr='range')
     yearrange = NumberRangeFilter(field_name='year',lookup_expr='range',label="year-range")
+    order = rest_framework.OrderingFilter(fields = (
+        ('year','year'),
+        ('discounted_price_calc', 'discounted_price')
+    ))
     def filter_discounted_price(self, queryset, name, value):
         # Annotate the queryset with the calculated field
         queryset = queryset.annotate(discounted_price_calc=F('price') - F('price') * F('discount'))
-        return queryset.filter(discounted_price_calc__range=value)
+        return queryset
 
     class Meta:
         model = Game
