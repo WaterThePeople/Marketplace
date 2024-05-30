@@ -26,15 +26,39 @@
 .info
     display: flex
     flex-direction: column
+    align-items: center
+    justify-content: center
     gap: 4px
     min-width: 100px
+    width: 100%
 
 .name
     font-size: 24px
     font-weight: 600
     text-align: left
 
+.price_container
+    height: calc(30% - 2px)
+    width: 100%
+    display: flex
+    flex-direction: row
+    gap: 8px
+    justify-content: center
+    align-items: center
+
 .price
-    font-size: 22px
+    font-size: 18px
     font-weight: 500
-    text-align: left
+    text-align: center
+
+.price_sale_active
+    font-size: 18px
+    font-weight: 500
+    text-align: center
+    text-decoration: line-through
+
+.price_sale
+    color: #23d400
+    font-size: 18px
+    font-weight: 500
+    text-align: center

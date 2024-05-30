@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import style from "./ProductsPage.module.sass";
 
 import CategoriesCard from "../../components/CategoriesCard/CategoriesCard";
@@ -6,95 +6,66 @@ import FiltersCard from "../../components/FiltersCard/FiltersCard";
 import ProductsPageItem from "../../components/ProductsPageItem/ProductsPageItem";
 import Pagination from "../../components/Pagination/Pagination";
 
-const products = [
-  {
-    name: "Dark Souls Remastered",
-    price: "149,99",
-    image: "/assets/ds1.jpg",
-    id: 0,
-  },
-  {
-    name: "Sekiro: Shadows Die Twice",
-    price: "249,99",
-    image: "/assets/sekiro.jpg",
-    id: 1,
-  },
-  {
-    name: "Elden Ring",
-    price: "244,99",
-    image: "/assets/elden_ring.jpg",
-    id: 2,
-  },
-  {
-    name: "MINECRAFT",
-    price: "99,99",
-    image: "/assets/minecraft.jpg",
-    id: 3,
-  },
-  {
-    name: "Dark Souls III",
-    price: "169,99",
-    image: "/assets/ds3.jpg",
-    id: 4,
-  },
-  {
-    name: "Dark Souls II",
-    price: "99,99",
-    image: "/assets/ds2.jpg",
-    id: 5,
-  },
-  {
-    name: "Super Mario Odyssey",
-    price: "199,99",
-    image: "/assets/mario.jpg",
-    id: 6,
-  },
-  {
-    name: "Baldur's Gate III",
-    price: "99,99",
-    image: "/assets/baldurs_gate_3.jpg",
-    id: 7,
-  },
-  {
-    name: "Monster Hunter World",
-    price: "149,99",
-    image: "/assets/mhw.png",
-    id: 8,
-  },
-  {
-    name: "Monster Hunter Rise",
-    price: "199,99",
-    image: "/assets/mhr.jpg",
-    id: 9,
-  },
-  {
-    name: "Dark Souls III",
-    price: "169,99",
-    image: "/assets/ds3.jpg",
-    id: 10,
-  },
-  {
-    name: "Dark Souls II",
-    price: "99,99",
-    image: "/assets/ds2.jpg",
-    id: 11,
-  },
-  {
-    name: "Super Mario Odyssey",
-    price: "199,99",
-    image: "/assets/mario.jpg",
-    id: 12,
-  },
-  {
-    name: "Dark Souls II",
-    price: "99,99",
-    image: "/assets/ds2.jpg",
-    id: 13,
-  },
-];
+import axios from "axios";
+import { serverPath } from "../../BackendServerPath";
 
 function ProductsPage() {
   const [currentPage, setCurrentPage] = useState(1);
+
+  const [count, setCount] = useState(0);
+  const [maxCount, setMaxCount] = useState(10);
+  const limit = 8;
+
+  const [minYear, setMinYear] = useState(1973);
+  const [maxYear, setMaxYear] = useState(2024);
+
+  const startYear = 1973;
+  const endYear = 2024;
+
+  const [products, setProducts] = useState([
+    {
+      name: "",
+      image: "",
+      price: "",
+      id: 0,
+      sale: false,
+      discount_price: "",
+    },
+  ]);
+
+  const fetchItems = () => {
+    axios
+      .get(
+        `${serverPath}api/allGame?limit=${limit}&offset=${count}&yearrange=${minYear}%2C${maxYear}`
+      )
+      .then((response) => {
+        setProducts(response?.data?.results);
+        setMaxCount(response?.data?.count);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+  };
+
+  useEffect(() => {
+    fetchItems();
+  }, [count]);
+
+  useEffect(() => {
+    setCount((currentPage - 1) * limit);
+  }, [currentPage]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      fetchItems();
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+  }, [minYear, maxYear]);
 
   return (
     <div className={style.container}>
@@ -104,24 +75,33 @@ function ProductsPage() {
         </div>
         <div className={style.products_container}>
           <div className={style.filters}>
-            <FiltersCard />
+            <FiltersCard
+              minYear={minYear}
+              setMinYear={setMinYear}
+              maxYear={maxYear}
+              setMaxYear={setMaxYear}
+              startYear={startYear}
+              endYear={endYear}
+            />
           </div>
           <div className={style.products}>
             {products.map((item, index) => (
               <ProductsPageItem
                 key={index}
-                name={item.name}
-                image={item.image}
-                price={item.price}
-                id={item.id}
+                name={item?.name}
+                image={item?.image}
+                price={item?.price}
+                sale={item?.sale}
+                id={item?.id}
+                discount_price={item?.discount_price}
               />
             ))}
           </div>
           <Pagination
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
-            pageSize={10}
-            amount={46}
+            pageSize={limit}
+            amount={maxCount}
           />
         </div>
       </div>
