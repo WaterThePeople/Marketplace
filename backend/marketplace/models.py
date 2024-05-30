@@ -20,12 +20,11 @@ PLATFORM_CHOICES = [("PC","PC"),("Other","Other")]
 class Game(models.Model):
     name = models.CharField(max_length=120)
     price = models.FloatField()
-    discount = models.FloatField(null=True,blank=True)
+    discount = models.FloatField(default=0)
     image = models.ImageField()
     recommended = models.BooleanField(default=False)
     new = models.BooleanField(default=False)
     bestsellers = models.BooleanField(default=False)
-    sale = models.BooleanField(default=False)
     popular = models.BooleanField(default=False)
     year = models.IntegerField(null= True)
     category = models.ManyToManyField(Category)
