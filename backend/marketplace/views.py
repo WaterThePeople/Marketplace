@@ -11,8 +11,8 @@ class NumberRangeFilter(rest_framework.BaseRangeFilter, rest_framework.NumberFil
     pass
 class FullListFilterSet(rest_framework.FilterSet):
 #    def to_html(self, request, queryset, view):
-    category = rest_framework.CharFilter(field_name='category__category_name', lookup_expr='icontains')
-    platform = rest_framework.CharFilter(field_name='platform__platform_name', lookup_expr='icontains')
+    category = rest_framework.CharFilter(field_name='category__category_name', lookup_expr='exact')
+    platform = rest_framework.CharFilter(field_name='platform__platform_name', lookup_expr='exact')
     pricerange = NumberRangeFilter(field_name='price',lookup_expr='range',label="price-range")
     discounted_price = NumberRangeFilter(method='filter_discounted_price',label="discounted-price-range")
     yearrange = NumberRangeFilter(field_name='year',lookup_expr='range',label="year-range")
