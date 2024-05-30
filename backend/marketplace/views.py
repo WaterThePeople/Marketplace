@@ -4,7 +4,8 @@ from .serializers import HomeGameSerializer, AllGameSerializer
 from .models import Game
 from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import rest_framework
-from django.db.models import F
+from django.db.models import F,When,Case, Value, Q,ExpressionWrapper
+from django.db.models import BooleanField
 # Create your views here.
 
 class NumberRangeFilter(rest_framework.BaseRangeFilter, rest_framework.NumberFilter):
@@ -14,24 +15,22 @@ class FullListFilterSet(rest_framework.FilterSet):
     category = rest_framework.CharFilter(field_name='category__category_name', lookup_expr='exact')
     platform = rest_framework.CharFilter(field_name='platform__platform_name', lookup_expr='exact')
     #pricerange = NumberRangeFilter(field_name='price',lookup_expr='range',label="price-range")
-    discountedpricerange = NumberRangeFilter(lookup_expr='range',label="discounted-price-range")
+    discountedpricerange = NumberRangeFilter(field_name= 'discounted_price_calc',lookup_expr='range',label="discounted-price-range")
+    sale = rest_framework.BooleanFilter(field_name = 'sale', label="sale")
     yearrange = NumberRangeFilter(field_name='year',lookup_expr='range',label="year-range")
     order = rest_framework.OrderingFilter(fields = (
         ('year','year'),
         ('discounted_price_calc','discounted_price')
         
     ))
-    def filter_discounted_price(self, queryset, name, value):
-        # Annotate the queryset with the calculated field
-        queryset = queryset.annotate(discounted_price_calc=F('price') - F('price') * F('discount'))
-        return queryset.filter(discounted_price_calc__range=value)
 
     def filter_queryset(self, queryset):
-        queryset = queryset.annotate(discounted_price_calc=F('price') - F('price') * (F('discount') or 0))
+        queryset = queryset.annotate(sale=ExpressionWrapper(Q(discount__gt=0),output_field=BooleanField()))
+        queryset = queryset.annotate( discounted_price_calc=F('price') - F('price') * F('discount'))
         return super().filter_queryset(queryset)
     class Meta:
         model = Game
-        fields = ['recommended','new','bestsellers','sale','popular','budget']
+        fields = ['recommended','new','bestsellers','popular','budget']
 
 class HomePageView(generics.ListAPIView):
     serializer_class = HomeGameSerializer
