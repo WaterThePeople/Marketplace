@@ -4,9 +4,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { serverPath } from "../../BackendServerPath";
 
-const platforms = ["PC", "Nintendo Switch", "Xbox One", "PS4", "PS5"];
-const categories = ["RPG", "Action", "Adventure"];
-
 function Product() {
   const { id } = useParams();
 
@@ -15,6 +12,13 @@ function Product() {
     price: "",
     image: "",
     id: 0,
+    year: 2000,
+    developer: "",
+    budget: "",
+    discount_price: "",
+    sale: false,
+    platform: [],
+    category: [],
   });
 
   const fetchItem = () => {
@@ -49,20 +53,20 @@ function Product() {
         <div className={style.info}>
           <div className={style.info_top}>
             <div className={style.text_line}>
-              <div className={style.id}>Product ID: {id}</div>
+              <div className={style.id}>Product ID: {item?.id}</div>
               <div className={style.text_container}>
                 <div className={style.text_title}>Release date:</div>
-                <div className={style.text}>2018</div>
+                <div className={style.text}>{item?.year}</div>
               </div>
             </div>
             <div className={style.text_line}>
               <div className={style.text_container}>
                 <div className={style.text_title}>Developer:</div>
-                <div className={style.text}>From Software</div>
+                <div className={style.text}>{item?.developer}</div>
               </div>
               <div className={style.text_container}>
                 <div className={style.text_title}>Budget:</div>
-                <div className={style.text}>AAA</div>
+                <div className={style.text}>{item?.budget}</div>
               </div>
             </div>
           </div>
@@ -70,7 +74,7 @@ function Product() {
           <div className={style.info_bottom}>
             <div className={style.text_container_col}>
               <div className={style.text_title}>Platforms:</div>
-              {platforms.map((item, index) => (
+              {item?.platform.map((item, index) => (
                 <div className={style.text} key={index}>
                   -{item}
                 </div>
@@ -78,7 +82,7 @@ function Product() {
             </div>
             <div className={style.text_container_col}>
               <div className={style.text_title}>Categories:</div>
-              {categories.map((item, index) => (
+              {item?.category.map((item, index) => (
                 <div className={style.text} key={index}>
                   -{item}
                 </div>
@@ -88,7 +92,16 @@ function Product() {
         </div>
         <div className={style.buy}>
           <div className={style.price_container}>
-            <div className={style.price}>{item?.price}zł</div>
+            {item?.sale ? (
+              <>
+                <div className={style.price_sale_active}>{item?.price}zł</div>
+                <div className={style.price_sale}>
+                  {Math.floor(parseFloat(item?.discount_price) * 100) / 100}zł
+                </div>
+              </>
+            ) : (
+              <div className={style.price}>{item?.price}zł</div>
+            )}
           </div>
           <div className={style.separator_horizontal} />
           <div className={style.buttons_container}>
