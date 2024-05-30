@@ -1,9 +1,14 @@
 import React from "react";
 import style from "./OverallHomeItem.module.sass";
+import { useNavigate } from "react-router-dom";
 
 function OverallHomeItem({ data, sale }: { data: any; sale?: boolean }) {
+  const navigate = useNavigate();
   return (
-    <button className={style.container}>
+    <button
+      className={style.container}
+      onClick={() => navigate(`/products/${data?.id}`)}
+    >
       <img
         src={process.env.PUBLIC_URL + data?.image}
         alt="image"
@@ -17,7 +22,7 @@ function OverallHomeItem({ data, sale }: { data: any; sale?: boolean }) {
           </div>
           {sale && (
             <div className={style.price_sale}>
-              {Math.round((data?.discount_price * 100) / 100).toFixed(2)} zł
+              {Math.floor(data?.discount_price * 100) / 100} zł
             </div>
           )}
         </div>

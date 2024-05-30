@@ -4,6 +4,7 @@ import SliderHomeItem from "../../components/SliderHomeItem/SliderHomeItem";
 import NewlyAddedHomeItem from "../../components/NewlyAddedHomeItem/NewlyAddedHomeItem";
 import OverallHomeItem from "../../components/OverallHomeItem/OverallHomeItem";
 import axios from "axios";
+import { serverPath } from "../../BackendServerPath";
 
 const overallList = ["POPULAR", "BESTSELLERS", "ON SALE"];
 
@@ -20,7 +21,7 @@ function Home() {
 
   const fetchRecommended = () => {
     axios
-      .get("api/home?recommended=true&limit=4")
+      .get(`${serverPath}api/home?recommended=true&limit=4`)
       .then((response) => {
         const data = response?.data?.results;
         setRecommendedList(data);
@@ -36,7 +37,7 @@ function Home() {
 
   const fetchNew = () => {
     axios
-      .get("api/home?new=true&limit=6")
+      .get(`${serverPath}api/home?new=true&limit=6`)
       .then((response) => {
         const data = response?.data?.results;
         setNewlyAddedList(data);
@@ -52,7 +53,7 @@ function Home() {
 
   const fetchPopular = () => {
     axios
-      .get("api/home?popular=true&limit=8")
+      .get(`${serverPath}api/home?popular=true&limit=8`)
       .then((response) => {
         const data = response.data.results;
         setPopularList(data);
@@ -68,7 +69,7 @@ function Home() {
 
   const fetchSale = () => {
     axios
-      .get("api/home?sale=true&limit=8")
+      .get(`${serverPath}api/home?sale=true&limit=8`)
       .then((response) => {
         const data = response.data.results;
         setSaleList(data);
@@ -84,7 +85,7 @@ function Home() {
 
   const fetchBestsellers = () => {
     axios
-      .get("api/home?bestsellers=true&limit=8")
+      .get(`${serverPath}api/home?bestsellers=true&limit=8`)
       .then((response) => {
         const data = response.data.results;
         setBestsellersList(data);
@@ -165,6 +166,7 @@ function Home() {
           name={recommendedList[currentRecommendedID]?.name}
           price={recommendedList[currentRecommendedID]?.price}
           image={recommendedList[currentRecommendedID]?.image}
+          id={recommendedList[currentRecommendedID]?.id}
         />
         <button
           className={style.slider_button}
@@ -206,16 +208,19 @@ function Home() {
             name={newlyAddedList[calcPosition(newlyAddedID)]?.name}
             price={newlyAddedList[calcPosition(newlyAddedID)]?.price}
             image={newlyAddedList[calcPosition(newlyAddedID)]?.image}
+            id={newlyAddedList[calcPosition(newlyAddedID)]?.id}
           />
           <NewlyAddedHomeItem
             name={newlyAddedList[calcPosition(newlyAddedID + 1)]?.name}
             price={newlyAddedList[calcPosition(newlyAddedID + 1)]?.price}
             image={newlyAddedList[calcPosition(newlyAddedID + 1)]?.image}
+            id={newlyAddedList[calcPosition(newlyAddedID + 1)]?.id}
           />
           <NewlyAddedHomeItem
             name={newlyAddedList[calcPosition(newlyAddedID + 2)]?.name}
             price={newlyAddedList[calcPosition(newlyAddedID + 2)]?.price}
             image={newlyAddedList[calcPosition(newlyAddedID + 2)]?.image}
+            id={newlyAddedList[calcPosition(newlyAddedID + 2)]?.id}
           />
         </div>
         <button
