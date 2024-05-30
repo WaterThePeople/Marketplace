@@ -11,8 +11,11 @@ class NumberRangeFilter(rest_framework.BaseRangeFilter, rest_framework.NumberFil
     pass
 class FullListFilterSet(rest_framework.FilterSet):
 #    def to_html(self, request, queryset, view):
+    category = rest_framework.CharFilter(field_name='categories__name', lookup_expr='icontains')
+    platform = rest_framework.CharFilter(field_name='platforms__name', lookup_expr='icontains')
     pricerange = NumberRangeFilter(field_name='price',lookup_expr='range',label="price-range")
     discounted_price = NumberRangeFilter(method='filter_discounted_price',label="discounted-price-range")
+    yearrange = NumberRangeFilter(field_name='year',lookup_expr='range',label="year-range")
     def filter_discounted_price(self, queryset, name, value):
         # Annotate the queryset with the calculated field
         queryset = queryset.annotate(discounted_price_calc=F('price') - F('price') * F('discount'))
@@ -20,7 +23,7 @@ class FullListFilterSet(rest_framework.FilterSet):
 
     class Meta:
         model = Game
-        fields = ['recommended','new','bestsellers','sale','popular','category','budget','platform']
+        fields = ['recommended','new','bestsellers','sale','popular','budget']
 
 class HomePageView(generics.ListAPIView):
     serializer_class = HomeGameSerializer
