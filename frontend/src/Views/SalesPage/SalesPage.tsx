@@ -59,7 +59,7 @@ function SalesPage() {
 
   return (
     <div className={style.container}>
-      <div className={style.main}>
+      {/* <div className={style.main}>
         <div className={style.categories}>
           <CategoriesCard />
         </div>
@@ -94,7 +94,7 @@ function SalesPage() {
             amount={maxCount}
           />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

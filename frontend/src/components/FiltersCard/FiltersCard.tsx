@@ -17,6 +17,13 @@ function FiltersCard({
   setMaxYear,
   startYear,
   endYear,
+  minPrice,
+  setMinPrice,
+  maxPrice,
+  setMaxPrice,
+  startPrice,
+  endPrice,
+  setOrder,
 }: {
   minYear: number;
   setMinYear: React.Dispatch<React.SetStateAction<number>>;
@@ -24,14 +31,27 @@ function FiltersCard({
   setMaxYear: React.Dispatch<React.SetStateAction<number>>;
   startYear: number;
   endYear: number;
+  minPrice: number;
+  setMinPrice: React.Dispatch<React.SetStateAction<number>>;
+  maxPrice: number;
+  setMaxPrice: React.Dispatch<React.SetStateAction<number>>;
+  startPrice: number;
+  endPrice: number;
+  setOrder: React.Dispatch<React.SetStateAction<string>>;
 }) {
-  const [year, setYear] = useState(1973);
-  const [currentYear, setCurrentYear] = useState(2024);
-
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(1000);
-
   const [sortBy, setSortBy] = useState(sortByList[0]);
+
+  useEffect(() => {
+    if (sortBy === sortByList[0]) {
+      setOrder("-year");
+    } else if (sortBy === sortByList[1]) {
+      setOrder("year");
+    } else if (sortBy === sortByList[2]) {
+      setOrder("-discounted_price");
+    } else if (sortBy === sortByList[3]) {
+      setOrder("discounted_price");
+    }
+  }, [sortBy]);
 
   return (
     <div className={style.container}>
@@ -60,8 +80,8 @@ function FiltersCard({
             setLeftValue={setMinPrice}
             rightValue={maxPrice}
             setRightValue={setMaxPrice}
-            min={0}
-            max={1000}
+            min={startPrice}
+            max={endPrice}
             width="100%"
           />
           <div className={style.slider_container_text_right}>{maxPrice}zł</div>

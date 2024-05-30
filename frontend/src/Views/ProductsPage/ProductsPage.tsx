@@ -18,9 +18,15 @@ function ProductsPage() {
 
   const [minYear, setMinYear] = useState(1973);
   const [maxYear, setMaxYear] = useState(2024);
-
   const startYear = 1973;
   const endYear = 2024;
+
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(1000);
+  const startPrice = 0;
+  const endPrice = 1000;
+
+  const [order, setOrder] = useState("-year");
 
   const [products, setProducts] = useState([
     {
@@ -36,7 +42,7 @@ function ProductsPage() {
   const fetchItems = () => {
     axios
       .get(
-        `${serverPath}api/allGame?limit=${limit}&offset=${count}&yearrange=${minYear}%2C${maxYear}`
+        `${serverPath}api/allGame?limit=${limit}&offset=${count}&yearrange=${minYear}%2C${maxYear}&discountedpricerange=${minPrice}%2C${maxPrice}&order=${order}`
       )
       .then((response) => {
         setProducts(response?.data?.results);
@@ -65,7 +71,7 @@ function ProductsPage() {
     }, 500);
 
     return () => clearTimeout(timeoutId);
-  }, [minYear, maxYear]);
+  }, [minYear, maxYear, minPrice, maxPrice, order]);
 
   return (
     <div className={style.container}>
@@ -82,6 +88,13 @@ function ProductsPage() {
               setMaxYear={setMaxYear}
               startYear={startYear}
               endYear={endYear}
+              minPrice={minPrice}
+              setMinPrice={setMinPrice}
+              maxPrice={maxPrice}
+              setMaxPrice={setMaxPrice}
+              startPrice={startPrice}
+              endPrice={endPrice}
+              setOrder={setOrder}
             />
           </div>
           <div className={style.products}>
