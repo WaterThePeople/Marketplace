@@ -70,4 +70,4 @@ class CategoriesView(generics.ListCreateAPIView):
 
 class PlatformsView(generics.ListCreateAPIView):
     serializer_class = PlatformSerializer
-    queryset = Category.objects.all()
+    queryset = Platform.objects.all()
