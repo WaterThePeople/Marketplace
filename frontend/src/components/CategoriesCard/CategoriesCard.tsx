@@ -1,46 +1,15 @@
 import React, { useState, useEffect } from "react";
 import style from "./CategoriesCard.module.sass";
 
-const category = [
-  "RPG",
-  "Adventure",
-  "Survival",
-  "Action",
-  "Strategy",
-  "Platformer",
-  "Fighting",
-  "Sports",
-  "Puzzle",
-  "FPS",
-  "Moba",
-  "Racing",
-];
-
-const gameBudget = ["AAA", "AA", "Indie"];
-
-const developer = [
-  "From Software",
-  "CD Projekt Red",
-  "EA",
-  "Sony",
-  "Nintendo",
-  "Square Enix",
-  "Microsoft",
-  "Ubisoft",
-  "Rockstar",
-  "Activision",
-];
-
-const platform = [
-  "Playstation 5",
-  "Playstation 4",
-  "Xbox One",
-  "Nintendo Switch",
-  "Nintendo DS",
-  "PC",
-];
-
-function CategoriesCard() {
+function CategoriesCard({
+  category,
+  gameBudget,
+  platform,
+}: {
+  category: any[];
+  gameBudget: any[];
+  platform: any[];
+}) {
   return (
     <div className={style.container}>
       <div className={style.category_container}>
@@ -48,7 +17,7 @@ function CategoriesCard() {
         {category.map((item, index) => (
           <div className={style.item} key={index}>
             <input className={style.item_checkbox} type="checkbox" />
-            <div className={style.text}>{item}</div>
+            <div className={style.text}>{item?.category_name}</div>
           </div>
         ))}
       </div>
@@ -61,15 +30,6 @@ function CategoriesCard() {
           </div>
         ))}
       </div>
-      {/* <div className={style.category_container}>
-        <div className={style.category}>Developer:</div>
-        {developer.map((item, index) => (
-          <div className={style.item} key={index}>
-            <input className={style.item_checkbox} type="checkbox" />
-            <div className={style.text}>{item}</div>
-          </div>
-        ))}
-      </div> */}
       <div className={style.category_container}>
         <div className={style.category}>Platform:</div>
         {platform.map((item, index) => (

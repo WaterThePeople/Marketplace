@@ -28,6 +28,10 @@ function ProductsPage() {
 
   const [order, setOrder] = useState("-year");
 
+  const [categories, setCategories] = useState([]);
+  const gameBudget = ["AAA", "AA", "Indie"];
+  const [platforms, setPlatforms] = useState([]);
+
   const [products, setProducts] = useState([
     {
       name: "",
@@ -57,6 +61,41 @@ function ProductsPage() {
       });
   };
 
+  const fetchCategories = () => {
+    axios
+      .get(`${serverPath}/api/categories`)
+      .then((response) => {
+        setCategories(response?.data);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+  };
+
+  const fetchPlatforms = () => {
+    axios
+      .get(`${serverPath}/api/platforms`)
+      .then((response) => {
+        setPlatforms(response?.data);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+  };
+
+  useEffect(() => {
+    fetchCategories();
+    fetchPlatforms();
+  }, []);
+
   useEffect(() => {
     fetchItems();
   }, [count]);
@@ -77,7 +116,11 @@ function ProductsPage() {
     <div className={style.container}>
       <div className={style.main}>
         <div className={style.categories}>
-          <CategoriesCard />
+          <CategoriesCard
+            category={categories}
+            gameBudget={gameBudget}
+            platform={platforms}
+          />
         </div>
         <div className={style.products_container}>
           <div className={style.filters}>

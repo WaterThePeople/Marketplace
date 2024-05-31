@@ -3,9 +3,11 @@ import style from "./Product.module.sass";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { serverPath } from "../../BackendServerPath";
+import { useNavigate } from "react-router-dom";
 
 function Product() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [item, setItem] = useState({
     name: "",
@@ -39,6 +41,15 @@ function Product() {
   useEffect(() => {
     fetchItem();
   }, []);
+
+  const addToCart = () => {
+    const storageItems = JSON.parse(localStorage.getItem("cartItems") || "");
+    let items: number[] = [];
+    items.push(item?.id);
+    let cartItems = storageItems.concat(items);
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    navigate("/cart");
+  };
 
   return (
     <div className={style.container}>
@@ -105,8 +116,9 @@ function Product() {
           </div>
           <div className={style.separator_horizontal} />
           <div className={style.buttons_container}>
-            <button className={style.button}>ADD TO CART</button>
-            <button className={style.button}>BUY</button>
+            <button className={style.button} onClick={() => addToCart()}>
+              ADD TO CART
+            </button>
           </div>
         </div>
       </div>

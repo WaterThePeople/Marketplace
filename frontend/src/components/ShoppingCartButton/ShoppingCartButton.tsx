@@ -7,7 +7,7 @@ function ShoppingCartButton() {
       <button
         className={style.button}
         onClick={(e) => {
-          window.location.href = "/";
+          window.location.href = "/cart";
         }}
       >
         <img

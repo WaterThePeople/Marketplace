@@ -11,6 +11,7 @@ import Rules from "./Views/Rules/Rules";
 import Help from "./Views/Help/Help";
 import Login from "./Views/Login/Login";
 import Register from "./Views/Register/Register";
+import Cart from "./Views/Cart/Cart";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <div className={style.container}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/products" element={<ProductsPage />} />
