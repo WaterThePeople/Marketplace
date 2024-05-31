@@ -1,3 +1,5 @@
 pipenv shell
 
 python manage.py runserver
+
+pip install -r req.txt

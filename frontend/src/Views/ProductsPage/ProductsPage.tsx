@@ -112,6 +112,9 @@ function ProductsPage() {
     return () => clearTimeout(timeoutId);
   }, [minYear, maxYear, minPrice, maxPrice, order]);
 
+  console.log(categories);
+  console.log(platforms);
+
   return (
     <div className={style.container}>
       <div className={style.main}>

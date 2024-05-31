@@ -35,7 +35,7 @@ function CategoriesCard({
         {platform.map((item, index) => (
           <div className={style.item} key={index}>
             <input className={style.item_checkbox} type="checkbox" />
-            <div className={style.text}>{item}</div>
+            <div className={style.text}>{item?.platform_name}</div>
           </div>
         ))}
       </div>
