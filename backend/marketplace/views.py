@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets, generics
-from .serializers import HomeGameSerializer, AllGameSerializer, CategorySerializer, PlatformSerializer
+from .serializers import HomeGameSerializer, AllGameSerializer, CategorySerializer, PlatformSerializer, RegisterSerializer
 from .models import Game, Category, Platform
 from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import rest_framework
@@ -70,4 +70,8 @@ class CategoriesView(generics.ListCreateAPIView):
 
 class PlatformsView(generics.ListCreateAPIView):
     serializer_class = PlatformSerializer
-    queryset = Category.objects.all()
+    queryset = Platform.objects.all()
+
+
+class RegisterView(generics.CreateAPIView):
+    serializer_class = RegisterSerializer
