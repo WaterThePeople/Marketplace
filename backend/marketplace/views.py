@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from rest_framework import viewsets, generics
-from .serializers import HomeGameSerializer, AllGameSerializer
-from .models import Game
+from .serializers import HomeGameSerializer, AllGameSerializer, CategorySerializer, PlatformSerializer
+from .models import Game, Category, Platform
 from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import rest_framework
-from django.db.models import F,When,Case, Value, Q,ExpressionWrapper
+from django.db.models import F, Q,ExpressionWrapper
 from django.db.models import BooleanField
 # Create your views here.
 
@@ -63,3 +63,11 @@ class AllGamesView(generics.ListAPIView):
     queryset = Game.objects.all()
     filter_backends = [DjangoFilterBackend]
     filterset_class = FullListFilterSet
+
+class CategoriesView(generics.ListCreateAPIView):
+    serializer_class = CategorySerializer
+    queryset = Category.objects.all()
+
+class PlatformsView(generics.ListCreateAPIView):
+    serializer_class = PlatformSerializer
+    queryset = Category.objects.all()

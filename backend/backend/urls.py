@@ -9,5 +9,7 @@ urlpatterns = [
     path('api/home',views.HomePageView.as_view()),
     path('api/allGame/modDel/<pk>',views.SingleModDelGameView.as_view()),
     path('api/allGame/add/<pk>',views.AddGameView.as_view()),
-    path('api/allGame',views.AllGamesView.as_view())
+    path('api/allGame',views.AllGamesView.as_view()),
+    path('api/categories',views.CategoriesView.as_view()),
+    path('api/platforms',views.PlatformsView.as_view()),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
