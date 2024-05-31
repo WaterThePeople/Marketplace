@@ -9,6 +9,8 @@ import Product from "./Views/Product/Product";
 import SalesPage from "./Views/SalesPage/SalesPage";
 import Rules from "./Views/Rules/Rules";
 import Help from "./Views/Help/Help";
+import Login from "./Views/Login/Login";
+import Register from "./Views/Register/Register";
 
 function App() {
   return (
@@ -17,11 +19,11 @@ function App() {
         <Navbar isLoggedIn={false} />
       </div>
 
-      <div className={style.separator} />
-
       <div className={style.container}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:id" element={<Product />} />
           <Route path="/sales" element={<SalesPage />} />
