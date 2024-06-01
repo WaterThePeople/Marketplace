@@ -24,6 +24,12 @@ function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
     }
   }, [path]);
 
+  const logout = () => {
+    window.location.reload();
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+  };
+
   return visibleNavbar ? (
     <>
       <div className={style.container}>
@@ -34,7 +40,9 @@ function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
           <div className={style.user}>
             <ShoppingCartButton />
             {isLoggedIn ? (
-              <div className={style.logged}>Water The People</div>
+              <button onClick={() => logout()} className={style.not_logged}>
+                Log Out
+              </button>
             ) : (
               <button
                 onClick={() => navigate("/login")}

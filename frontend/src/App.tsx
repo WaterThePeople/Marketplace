@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar/Navbar";
 import style from "./App.module.sass";
@@ -13,11 +13,24 @@ import Login from "./Views/Login/Login";
 import Register from "./Views/Register/Register";
 import Cart from "./Views/Cart/Cart";
 
+import { checkUserAuth } from "./Authentication";
+
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const authStatus = await checkUserAuth();
+      setIsAuthenticated(authStatus);
+    };
+
+    checkAuth();
+  }, []);
+
   return (
     <Router>
       <div className={style.container}>
-        <Navbar isLoggedIn={false} />
+        <Navbar isLoggedIn={isAuthenticated} />
       </div>
 
       <div className={style.container}>
