@@ -28,9 +28,21 @@ function ProductsPage() {
 
   const [order, setOrder] = useState("-year");
 
+  const [gameBudget, setGameBudget] = useState([
+    { name: "AAA", check: false },
+    { name: "AA", check: false },
+    { name: "INDIE", check: false },
+  ]);
+
   const [categories, setCategories] = useState([]);
-  const gameBudget = ["AAA", "AA", "Indie"];
   const [platforms, setPlatforms] = useState([]);
+
+  const [selectedCategories, setSelectedCategories] = useState<any[]>([]);
+  const [selectedPlatforms, setSelectedPlatforms] = useState<any[]>([]);
+  const [selectedBudget, setSelectedBudget] = useState("");
+
+  const [currentCategories, setCurrentCategories] = useState("");
+  const [currentPlatforms, setCurrentPlatforms] = useState("");
 
   const [products, setProducts] = useState([
     {
@@ -46,7 +58,7 @@ function ProductsPage() {
   const fetchItems = () => {
     axios
       .get(
-        `${serverPath}api/allGame?limit=${limit}&offset=${count}&yearrange=${minYear}%2C${maxYear}&discountedpricerange=${minPrice}%2C${maxPrice}&order=${order}`
+        `${serverPath}api/allGame?limit=${limit}&offset=${count}&yearrange=${minYear}%2C${maxYear}&discountedpricerange=${minPrice}%2C${maxPrice}&order=${order}&budget=${selectedBudget}${currentCategories}${currentPlatforms}`
       )
       .then((response) => {
         setProducts(response?.data?.results);
@@ -107,13 +119,20 @@ function ProductsPage() {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       fetchItems();
+      setCurrentPage(1);
     }, 500);
 
     return () => clearTimeout(timeoutId);
-  }, [minYear, maxYear, minPrice, maxPrice, order]);
-
-  console.log(categories);
-  console.log(platforms);
+  }, [
+    minYear,
+    maxYear,
+    minPrice,
+    maxPrice,
+    order,
+    selectedBudget,
+    currentCategories,
+    currentPlatforms,
+  ]);
 
   return (
     <div className={style.container}>
@@ -123,6 +142,14 @@ function ProductsPage() {
             category={categories}
             gameBudget={gameBudget}
             platform={platforms}
+            setGameBudget={setGameBudget}
+            setSelectedCategories={setSelectedCategories}
+            setSelectedPlatforms={setSelectedPlatforms}
+            setSelectedBudget={setSelectedBudget}
+            selectedCategories={selectedCategories}
+            selectedPlatforms={selectedPlatforms}
+            setCurrentCategories={setCurrentCategories}
+            setCurrentPlatforms={setCurrentPlatforms}
           />
         </div>
         <div className={style.products_container}>
