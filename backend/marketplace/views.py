@@ -11,6 +11,7 @@ from django.db.models import BooleanField
 class NumberRangeFilter(rest_framework.BaseRangeFilter, rest_framework.NumberFilter):
     pass
 
+
 class HomePageFilterSet(rest_framework.FilterSet):
     sale = rest_framework.BooleanFilter(field_name = 'sale', label="sale")
     def filter_queryset(self, queryset):
@@ -22,8 +23,8 @@ class HomePageFilterSet(rest_framework.FilterSet):
 
 class FullListFilterSet(rest_framework.FilterSet):
 #    def to_html(self, request, queryset, view):
-    category = rest_framework.CharFilter(field_name='category__category_name', lookup_expr='exact')
-    platform = rest_framework.CharFilter(field_name='platform__platform_name', lookup_expr='exact')
+    category = rest_framework.ModelMultipleChoiceFilter(field_name='category__category_name', to_field_name = 'category_name',queryset= Category.objects.all())
+    platform = rest_framework.ModelMultipleChoiceFilter(field_name='platform__platform_name', to_field_name = 'platform_name',queryset= Platform.objects.all())
     #pricerange = NumberRangeFilter(field_name='price',lookup_expr='range',label="price-range")
     discountedpricerange = NumberRangeFilter(field_name= 'discounted_price_calc',lookup_expr='range',label="discounted-price-range")
     sale = rest_framework.BooleanFilter(field_name = 'sale', label="sale")
@@ -40,7 +41,7 @@ class FullListFilterSet(rest_framework.FilterSet):
         return super().filter_queryset(queryset)
     class Meta:
         model = Game
-        fields = ['recommended','new','bestsellers','popular','budget']
+        fields = ['recommended','new','category','platform','bestsellers','popular','budget']
 
 class HomePageView(generics.ListAPIView):
     serializer_class = HomeGameSerializer
