@@ -20,6 +20,7 @@ class HomeGameSerializer(serializers.ModelSerializer):
         return obj.discount != 0
     def get_discount_price(self, obj):
         return obj.price - obj.price * obj.discount
+
     class Meta:
         model = Game
         fields = ('id', 'name', 'price','discount_price', 'image','recommended','new','bestsellers','sale','popular')
@@ -30,6 +31,7 @@ class AllGameSerializer(serializers.ModelSerializer):
     category = serializers.SerializerMethodField()
     platform = serializers.SerializerMethodField()
     sale = serializers.SerializerMethodField()
+    owner = serializers.ReadOnlyField(source='owner.username')
     discount_price = serializers.SerializerMethodField('get_discount_price')
     def get_sale(self,obj):
         return obj.discount != 0
@@ -44,7 +46,14 @@ class AllGameSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Game
-        fields = ('id', 'name', 'price','discount_price', 'image','recommended','new','sale','year','category','budget','developer','platform')
+        fields = ('id', 'name', 'price','discount_price', 'image','recommended','new','sale','year','category','budget','developer','platform','owner')
+
+class UserSerializer(serializers.ModelSerializer):
+    submissions = serializers.PrimaryKeyRelatedField(many=True, queryset=Game.objects.all())
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'submissions']
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
