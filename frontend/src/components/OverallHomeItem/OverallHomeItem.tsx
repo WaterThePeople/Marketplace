@@ -2,7 +2,7 @@ import React from "react";
 import style from "./OverallHomeItem.module.sass";
 import { useNavigate } from "react-router-dom";
 
-function OverallHomeItem({ data, sale }: { data: any; sale?: boolean }) {
+function OverallHomeItem({ data }: { data: any }) {
   const navigate = useNavigate();
   return (
     <button
@@ -17,10 +17,10 @@ function OverallHomeItem({ data, sale }: { data: any; sale?: boolean }) {
       <div className={style.info}>
         <div className={style.text}>{data?.name}</div>
         <div className={style.prices}>
-          <div className={sale ? style.price_sale_active : style.price}>
+          <div className={data?.sale ? style.price_sale_active : style.price}>
             {data?.price} zł
           </div>
-          {sale && (
+          {data?.sale && (
             <div className={style.price_sale}>
               {Math.floor(data?.discount_price * 100) / 100} zł
             </div>

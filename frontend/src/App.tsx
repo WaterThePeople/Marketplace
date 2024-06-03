@@ -12,20 +12,28 @@ import Help from "./Views/Help/Help";
 import Login from "./Views/Login/Login";
 import Register from "./Views/Register/Register";
 import Cart from "./Views/Cart/Cart";
+import UserProducts from "./Views/UserProducts/UserProducts";
+import AddProduct from "./components/AddProduct/AddProduct";
 
 import { checkUserAuth } from "./Authentication";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const cartItems = localStorage.getItem("cartItems");
 
   useEffect(() => {
     const checkAuth = async () => {
       const authStatus = await checkUserAuth();
       setIsAuthenticated(authStatus);
     };
+    if (!cartItems) {
+      localStorage.setItem("cartItems", "[]");
+    }
 
     checkAuth();
   }, []);
+
+  console.log(cartItems);
 
   return (
     <Router>
@@ -44,6 +52,10 @@ function App() {
           <Route path="/sales" element={<SalesPage />} />
           <Route path="/rules" element={<Rules />} />
           <Route path="/questions" element={<Help />} />
+          {isAuthenticated && (
+            <Route path="/usergames" element={<UserProducts />} />
+          )}
+          {isAuthenticated && <Route path="/add" element={<AddProduct />} />}
         </Routes>
       </div>
     </Router>

@@ -55,10 +55,13 @@ function ProductsPage() {
     },
   ]);
 
+  const accessToken = localStorage.getItem("accessToken");
+
   const fetchItems = () => {
     axios
       .get(
-        `${serverPath}api/allGame?limit=${limit}&offset=${count}&yearrange=${minYear}%2C${maxYear}&discountedpricerange=${minPrice}%2C${maxPrice}&order=${order}&budget=${selectedBudget}${currentCategories}${currentPlatforms}`
+        `${serverPath}api/allGame?limit=${limit}&offset=${count}&yearrange=${minYear}%2C${maxYear}&discountedpricerange=${minPrice}%2C${maxPrice}&order=${order}&budget=${selectedBudget}${currentCategories}${currentPlatforms}`,
+        // { headers: { Authorization: `Bearer ${accessToken}` } }
       )
       .then((response) => {
         setProducts(response?.data?.results);

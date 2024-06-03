@@ -36,11 +36,13 @@ function Cart() {
   }, []);
 
   const fetchAllItems = async () => {
-    await Promise.all(
-      items.map((item, index) => {
-        fetchItem(item);
-      })
-    );
+    if (items.length > 0) {
+      await Promise.all(
+        items?.map((item, index) => {
+          fetchItem(item);
+        })
+      );
+    }
   };
 
   useEffect(() => {
@@ -80,7 +82,7 @@ function Cart() {
         Go to payment - {Math.floor(parseFloat(fullPrice) * 100) / 100}zł
       </button>
       <div className={style.cart_container}>
-        {cartItems.length > 0 &&
+        {cartItems?.length > 0 &&
           cartItems?.map((item, index) => (
             <>
               <div className={style.item_container} key={index}>
@@ -90,7 +92,12 @@ function Cart() {
                   className={style.image}
                 />
                 <div className={style.separator_vertical} />
-                <div className={style.item_name}>{item?.name}</div>
+                <div
+                  className={style.item_name}
+                  onClick={() => navigate(`/products/${item?.id}`)}
+                >
+                  {item?.name}
+                </div>
                 <div className={style.separator_vertical} />
                 <div
                   className={

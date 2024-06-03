@@ -4,6 +4,7 @@ import Logo from "../components/Logo/Logo";
 import ShoppingCartButton from "../components/ShoppingCartButton/ShoppingCartButton";
 import { useNavigate } from "react-router-dom";
 import useWindowDimensions from "../utils/useWindowDimensions";
+import UserSettings from "../components/UserSettings/UserSettings";
 
 function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
   let navigate = useNavigate();
@@ -24,12 +25,6 @@ function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
     }
   }, [path]);
 
-  const logout = () => {
-    window.location.reload();
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-  };
-
   return visibleNavbar ? (
     <>
       <div className={style.container}>
@@ -40,9 +35,7 @@ function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
           <div className={style.user}>
             <ShoppingCartButton />
             {isLoggedIn ? (
-              <button onClick={() => logout()} className={style.not_logged}>
-                Log Out
-              </button>
+              <UserSettings />
             ) : (
               <button
                 onClick={() => navigate("/login")}

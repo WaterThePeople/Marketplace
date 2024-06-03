@@ -15,6 +15,7 @@ class HomePageView(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_class = HomePageFilterSet
 
+
 class SingleModDelGameView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AllGameSerializer
     queryset = Game.objects.all()
@@ -22,12 +23,15 @@ class SingleModDelGameView(generics.RetrieveUpdateDestroyAPIView):
 #    filter_backends = [DjangoFilterBackend]
 #    filterset_fields = ['recommended','new','bestsellers']
 
+
 class AddGameView(generics.CreateAPIView):
     serializer_class = AllGameSerializer
     queryset = Game.objects.all()
     permission_classes = [permissions.IsAuthenticated]
+
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
 
 class AllGamesView(generics.ListAPIView):
     serializer_class = AllGameSerializer
@@ -35,9 +39,11 @@ class AllGamesView(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_class = FullListFilterSet
 
+
 class CategoriesView(generics.ListCreateAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
+
 
 class PlatformsView(generics.ListCreateAPIView):
     serializer_class = PlatformSerializer
@@ -46,6 +52,7 @@ class PlatformsView(generics.ListCreateAPIView):
 
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
+
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()

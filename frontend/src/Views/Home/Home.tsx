@@ -261,7 +261,7 @@ function Home() {
             ))}
           {currentOverallItem === "ON SALE" &&
             saleList.map((item, index) => (
-              <OverallHomeItem data={item} key={index} sale={true} />
+              <OverallHomeItem data={item} key={index} />
             ))}
         </div>
         <div className={style.footer}>
