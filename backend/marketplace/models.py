@@ -1,7 +1,7 @@
 from django.db import models
 
 from django.contrib.auth.models import User
-
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Category(models.Model):
     category_name = models.CharField(max_length=50)
@@ -29,7 +29,7 @@ def get_or_create_default_admin_user():
 class Game(models.Model):
     name = models.CharField(max_length=120)
     price = models.FloatField()
-    discount = models.FloatField(default=0)
+    discount = models.FloatField(default=0,validators=[MinValueValidator(0), MaxValueValidator(1)])
     image = models.ImageField()
     recommended = models.BooleanField(default=False)
     new = models.BooleanField(default=False)

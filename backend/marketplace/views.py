@@ -26,12 +26,12 @@ class SingleModDelGameView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class AddGameView(generics.CreateAPIView):
-    serializer_class = AllGameSerializer
+    serializer_class = AddGameSerializer
     queryset = Game.objects.all()
     permission_classes = [permissions.IsAuthenticated]
     parser_classes = (MultiPartParser, FormParser)
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save(owner=self.request.user, new=True)
 
 
 class AllGamesView(generics.ListAPIView):
