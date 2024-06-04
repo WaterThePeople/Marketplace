@@ -48,7 +48,7 @@ class AllGameSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Game
-        fields = ('id', 'name', 'price','discount_price', 'image','recommended','new','sale','year','category','budget','developer','platform','owner')
+        fields = ('id', 'name', 'price','discount','discount_price', 'image','recommended','new','sale','year','category','budget','developer','platform','owner')
 
 class UserSerializer(serializers.ModelSerializer):
     submissions = serializers.PrimaryKeyRelatedField(many=True, queryset=Game.objects.all())
