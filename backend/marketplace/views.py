@@ -18,7 +18,7 @@ class HomePageView(generics.ListAPIView):
 
 
 class SingleModDelGameView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = AllGameSerializer
+    serializer_class = AddGameSerializer
     queryset = Game.objects.all()
     permission_classes = [IsOwnerOrReadOnly]
 #    filter_backends = [DjangoFilterBackend]
