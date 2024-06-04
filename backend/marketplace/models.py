@@ -16,9 +16,9 @@ class Platform(models.Model):
     def __str__(self):
         return self.platform_name
 # Create your models here.
-CATEGORY_CHOICES = [("RPG","RPG"),("Action","Action"),("FPS","FPS"),("PLatformer","PLatformer"),("Open-World","Open-World")]
+#CATEGORY_CHOICES = [("RPG","RPG"),("Action","Action"),("FPS","FPS"),("PLatformer","PLatformer"),("Open-World","Open-World")]
 BUDGET_CHOICES = [("NONE","NONE"),("INDIE","INDIE"),("AA","AA"),("AAA","AAA"),('AAAA','AAAA')]
-PLATFORM_CHOICES = [("PC","PC"),("Other","Other")]
+#PLATFORM_CHOICES = [("PC","PC"),("Other","Other")]
 def get_or_create_default_admin_user():
     user,created =  User.objects.get_or_create(username='admin',is_staff=True,is_superuser=True)
     if created:

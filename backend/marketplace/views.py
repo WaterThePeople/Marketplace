@@ -17,12 +17,16 @@ class HomePageView(generics.ListAPIView):
     filterset_class = HomePageFilterSet
 
 
-class SingleModDelGameView(generics.RetrieveUpdateDestroyAPIView):
+class ModDelGameView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AddGameSerializer
     queryset = Game.objects.all()
     permission_classes = [IsOwnerOrReadOnly]
 #    filter_backends = [DjangoFilterBackend]
 #    filterset_fields = ['recommended','new','bestsellers']
+class SingleGameView(generics.RetrieveAPIView):
+    serializer_class = AllGameSerializer
+    queryset = Game.objects.all()
+    permission_classes = [IsOwnerOrReadOnly]
 
 
 class AddGameView(generics.CreateAPIView):

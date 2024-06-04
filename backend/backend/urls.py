@@ -10,8 +10,9 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/home',views.HomePageView.as_view()),
-    path('api/allGame/modDel/<pk>',views.SingleModDelGameView.as_view()),
+    path('api/allGame/modDel/<pk>',views.ModDelGameView.as_view()),
     path('api/allGame/add/',views.AddGameView.as_view()),
+    path('api/allGame/<pk>',views.SingleGameView.as_view()),
     path('api/allGame',views.AllGamesView.as_view()),
     path('api/categories',views.CategoriesView.as_view()),
     path('api/platforms',views.PlatformsView.as_view()),
