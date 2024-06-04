@@ -13,7 +13,8 @@ import Login from "./Views/Login/Login";
 import Register from "./Views/Register/Register";
 import Cart from "./Views/Cart/Cart";
 import UserProducts from "./Views/UserProducts/UserProducts";
-import AddProduct from "./components/AddProduct/AddProduct";
+import AddProduct from "./Views/AddProduct/AddProduct";
+import EditProduct from "./Views/EditProduct/EditProduct";
 
 import { checkUserAuth } from "./Authentication";
 
@@ -32,8 +33,6 @@ function App() {
 
     checkAuth();
   }, []);
-
-  console.log(cartItems);
 
   return (
     <Router>
@@ -56,6 +55,9 @@ function App() {
             <Route path="/usergames" element={<UserProducts />} />
           )}
           {isAuthenticated && <Route path="/add" element={<AddProduct />} />}
+          {isAuthenticated && (
+            <Route path="/edit/:id" element={<EditProduct />} />
+          )}
         </Routes>
       </div>
     </Router>

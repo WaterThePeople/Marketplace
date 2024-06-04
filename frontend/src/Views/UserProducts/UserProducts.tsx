@@ -53,6 +53,23 @@ function UserProducts() {
     setCount((currentPage - 1) * limit);
   }, [currentPage]);
 
+  const deleteItem = (id: number) => {
+    axios
+      .delete(`${serverPath}/api/allGame/modDel/${id}`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((response) => {
+        fetchItems();
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+  };
+
   return (
     <div className={style.container}>
       <div className={style.main}>
@@ -89,13 +106,13 @@ function UserProducts() {
                 <div className={style.separator_vertical} />
                 <button
                   className={style.edit}
-                  //onClick={() => removeItem(item?.id)}
+                  onClick={() => navigate(`/edit/${item?.id}`)}
                 >
                   Edit
                 </button>
                 <button
                   className={style.remove}
-                  //onClick={() => removeItem(item?.id)}
+                  onClick={() => deleteItem(item?.id)}
                 >
                   Delete
                 </button>
