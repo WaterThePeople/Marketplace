@@ -15,7 +15,7 @@ function Cart() {
 
   const fetchItem = async (id: number) => {
     axios
-      .get(`${serverPath}api/allGame/modDel/${id}`)
+      .get(`${serverPath}api/allGame/${id}`)
       .then((response) => {
         setCartItems((cartItems) => [...cartItems, response?.data]);
       })

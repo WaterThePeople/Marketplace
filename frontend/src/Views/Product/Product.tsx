@@ -25,7 +25,7 @@ function Product() {
 
   const fetchItem = () => {
     axios
-      .get(`${serverPath}api/allGame/modDel/${id}`)
+      .get(`${serverPath}api/allGame/${id}`)
       .then((response) => {
         setItem(response?.data);
       })
