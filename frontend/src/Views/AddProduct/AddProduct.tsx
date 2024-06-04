@@ -4,6 +4,7 @@ import Pagination from "../../components/Pagination/Pagination";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { serverPath } from "../../BackendServerPath";
+import { Blob } from "buffer";
 
 function AddProduct() {
   let navigate = useNavigate();
@@ -12,7 +13,7 @@ function AddProduct() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [discount, setDiscount] = useState("");
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState<any>();
   const [year, setYear] = useState("");
   const [developer, setDeveloper] = useState("");
 
@@ -25,9 +26,12 @@ function AddProduct() {
   const [selectedCategories, setSelectedCategories] = useState<any[]>([]);
   const [selectedPlatforms, setSelectedPlatforms] = useState<any[]>([]);
 
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   function changeFile(e: any) {
     if (e.target.files.length > 0) {
-      setFile(URL.createObjectURL(e.target.files[0]));
+      setFile(e.target.files[0]);
     }
   }
 
@@ -119,25 +123,48 @@ function AddProduct() {
     setSelectedPlatforms(temp);
   };
 
+  const testCategory = [1, 2, 11];
+
   const addItem = () => {
+    let form_data = new FormData();
+    let discount_price = (parseInt(discount) / 100).toString();
+    if (file) {
+      form_data.append("image", file, file?.name);
+    }
+
+    form_data.append("name", name);
+    form_data.append("price", price);
+    form_data.append("discount", discount_price);
+    form_data.append("year", year);
+    form_data.append("developer", developer);
+    if (AA) {
+      form_data.append("budget", "AA");
+    }
+    if (AAA) {
+      form_data.append("budget", "AAA");
+    }
+    if (INDIE) {
+      form_data.append("budget", "INDIE");
+    }
+    form_data.append("category", JSON.stringify(testCategory));
+
     axios
-      .post(
-        `${serverPath}api/allGame/add`,
-        { body: {} },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
+      .post(`${serverPath}api/allGame/add/`, form_data, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
       .then((response) => {
         console.log(response);
+        setSuccess(true);
+        setError(false);
       })
       .catch((error) => {
         if (error.response) {
           console.log(error.response);
           console.log(error.response.status);
           console.log(error.response.headers);
+          setError(true);
         }
       });
   };
@@ -168,7 +195,7 @@ function AddProduct() {
           className={style.input}
           value={discount}
           onChange={(e) => setDiscount(e.target.value)}
-          placeholder="Discount"
+          placeholder="Discount in %"
         ></input>
         <input
           type="number"
@@ -197,7 +224,7 @@ function AddProduct() {
               className={style.item_checkbox}
               type="checkbox"
               checked={AA}
-              onClick={() => setAA(!AA)}
+              onChange={() => setAA(!AA)}
             />
           </div>
           <div className={style.item}>
@@ -206,7 +233,7 @@ function AddProduct() {
               className={style.item_checkbox}
               type="checkbox"
               checked={AAA}
-              onClick={() => setAAA(!AAA)}
+              onChange={() => setAAA(!AAA)}
             />
           </div>
           <div className={style.item}>
@@ -215,7 +242,7 @@ function AddProduct() {
               className={style.item_checkbox}
               type="checkbox"
               checked={INDIE}
-              onClick={() => setINDIE(!INDIE)}
+              onChange={() => setINDIE(!INDIE)}
             />
           </div>
         </div>
@@ -245,7 +272,10 @@ function AddProduct() {
             </div>
           ))}
         </div>
-        <button className={style.add_button}>ADD GAME</button>
+        {error && <div className={style.error}>Something went wrong!</div>}
+        <button className={style.add_button} onClick={() => addItem()}>
+          ADD GAME
+        </button>
       </div>
     </div>
   );
