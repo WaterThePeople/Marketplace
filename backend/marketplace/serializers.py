@@ -33,6 +33,7 @@ class AllGameSerializer(serializers.ModelSerializer):
     sale = serializers.SerializerMethodField()
     owner = serializers.ReadOnlyField(source='owner.username')
     discount_price = serializers.SerializerMethodField('get_discount_price')
+    image = serializers.ImageField()
     def get_sale(self,obj):
         return obj.discount != 0
     def get_category(self, obj):
@@ -44,6 +45,7 @@ class AllGameSerializer(serializers.ModelSerializer):
     def get_discount_price(self, obj):
         return obj.price - obj.price * obj.discount
     
+
     class Meta:
         model = Game
         fields = ('id', 'name', 'price','discount_price', 'image','recommended','new','sale','year','category','budget','developer','platform','owner')

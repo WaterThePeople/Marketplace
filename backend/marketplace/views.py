@@ -6,6 +6,7 @@ from .filters import *
 from .permissions import IsOwnerOrReadOnly
 from django.contrib.auth.models import User
 from rest_framework import permissions
+from rest_framework.parsers import MultiPartParser, FormParser
 # Create your views here.
 
 
@@ -28,7 +29,7 @@ class AddGameView(generics.CreateAPIView):
     serializer_class = AllGameSerializer
     queryset = Game.objects.all()
     permission_classes = [permissions.IsAuthenticated]
-
+    parser_classes = (MultiPartParser, FormParser)
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
